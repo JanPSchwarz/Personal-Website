@@ -3,21 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --colorPreset1: 34, 31, 31;
+  --colorPreset2: 255, 255, 255;
+  --colorPreset3: 166, 187, 204;
+  --colorPreset4: 217, 217, 217;
+  --colorPreset5: 65, 190, 160;
+  --colorPreset6: 199, 56, 90;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 50px;
+  overflow-y: hidden;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
 }
 
 @layer utilities {
