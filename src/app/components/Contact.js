@@ -16,7 +16,7 @@ export default function Contact({ closeMessenger }) {
   const [reCaptcha, setReCaptcha] = useState(null);
   const [showReCaptcha, setShowReCaptcha] = useState(false);
 
-  //* delays render of reCaptcha due to laggy animation issues when rendering contact.js
+  //* delays render of reCaptcha because of laggy animation issues when rendering contact.js
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setShowReCaptcha(true);
