@@ -150,7 +150,8 @@ export default forwardRef(function Projects(props, ref) {
                       src={href}
                       fill
                       draggable={false}
-                      className={`relative object-contain`}
+                      className={`relative cursor-pointer object-contain`}
+                      sizes="(max-width: 768px) 70vw, (max-width: 1024px) 50vw, 33vw"
                       onClick={() => {
                         setImageIndex((prev) => (prev + 1) % images.length);
                       }}

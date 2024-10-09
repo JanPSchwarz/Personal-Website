@@ -5,6 +5,7 @@ import { forwardRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import CVbutton from "@/app/components/CVbutton";
 import Contact from "./Contact";
+import coverPic from "/public/assets/b5792ad4-cutted-1.png";
 
 export default forwardRef(function Hero(props, ref) {
   const [showMessenger, setShowMessenger] = useState(false);
@@ -49,9 +50,10 @@ export default forwardRef(function Hero(props, ref) {
           className={`relative left-[8%] aspect-square w-full overflow-hidden md:w-[80%] landscape:absolute landscape:left-[55%] landscape:w-[60%]`}
         >
           <Image
-            src={"/assets/b5792ad4-cutted (1).png"}
+            src={coverPic}
             fill
             alt="Bild von Jan"
+            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
             priority
             className={`relative left-5 -rotate-[10deg] object-contain`}
           />
