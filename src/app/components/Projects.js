@@ -57,16 +57,16 @@ export default forwardRef(function Projects(props, ref) {
   });
 
   const animation = {
-    inital: { x: swipe === "Left" ? 300 : -300, opacity: 0.2 },
+    inital: { x: swipe === "Left" ? 300 : -300, opacity: 0 },
     animate: { x: 0, opacity: 1 },
-    transition: { duration: 0.3 },
-    exit: { x: swipe === "Left" ? -300 : 300, opacity: 0.2 },
+    transition: { duration: 0.3, ease: "linear" },
+    exit: { x: swipe === "Left" ? -300 : 300, opacity: 0 },
   };
 
   const { inital, animate, transition, exit } = animation;
 
   return (
-    <div id="projects" ref={(el) => (ref.current[2] = el)}>
+    <div id="projects" className={`h-full`} ref={(el) => (ref.current[2] = el)}>
       {fullScreenGallery && (
         <FullScreenImage
           arrowClick={changeImage}
@@ -76,126 +76,146 @@ export default forwardRef(function Projects(props, ref) {
           close={() => closeFullScreenImage()}
         />
       )}
-      <div className={`select-none`} {...touchHandlers}>
+      <div className={`h-full select-none`} {...touchHandlers}>
         <AnimatePresence initial={false} mode="wait">
           <motion.div
             key={heading}
-            className={`mx-auto flex h-dvh w-[80%] snap-center flex-col items-center justify-evenly pt-[50px]`}
+            className={`mx-auto flex h-full w-[85%] max-w-[1200px] snap-start flex-col items-center justify-evenly gap-4 py-4 pt-[60px] md:pt-[80px] lg:gap-10`}
           >
-            <div
-              className={`relative mt-4 flex w-full items-center justify-between`}
-            >
-              <motion.h2
-                initial={inital}
-                animate={animate}
-                transition={transition}
-                exit={exit}
-                className={`w-full text-left text-[26px] font-extrabold text-colorPreset3`}
-              >
-                {heading}
-              </motion.h2>
-              <div className={`absolute -top-4 left-0 z-10 flex gap-2`}>
-                {projectsData.map((project, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className={`size-2 rounded-full bg-colorPreset2 ${projectIndex !== index && `opacity-20`}`}
-                      onClick={() => {
-                        nextProject(index);
-                      }}
-                    ></div>
-                  );
-                })}
-              </div>
+            <div className={`flex w-full`}>
               <div
-                className={`z-10 flex items-center justify-evenly gap-2 bg-colorPreset1`}
+                className={`z-10 flex w-full flex-col gap-2 self-start md:-top-6 md:gap-4`}
               >
-                <a href={github} target="_blank">
-                  <FaGithub className={`fill-colorPreset5 size-8 flex-1`} />
-                </a>
-                <a
-                  className={`bg-colorPreset5 flex aspect-square flex-1 items-center rounded-full p-1 text-sm text-colorPreset1`}
-                  href={url}
-                  target="_blank"
+                <div className={`flex gap-2`}>
+                  {projectsData.map((project, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className={`size-2 cursor-pointer rounded-full bg-colorPreset2 hover:bg-opacity-50 md:size-3 ${projectIndex !== index && `opacity-20`}`}
+                        onClick={() => {
+                          nextProject(index);
+                        }}
+                      ></div>
+                    );
+                  })}
+                </div>
+                <div
+                  className={`z-10 flex w-full items-center justify-between gap-2 bg-colorPreset1`}
                 >
-                  URL
-                </a>
+                  <motion.h2
+                    initial={inital}
+                    animate={animate}
+                    transition={transition}
+                    exit={exit}
+                    className={`w-full text-left text-[clamp(1.6rem,_7vw,_2.5rem)] font-extrabold text-colorPreset3`}
+                  >
+                    {heading}
+                  </motion.h2>
+                  <a href={github} target="_blank">
+                    <FaGithub
+                      className={`fill-colorPreset5 size-8 flex-1 cursor-pointer hover:scale-110 hover:fill-colorPreset2 active:scale-90 md:size-12`}
+                    />
+                  </a>
+                  <a
+                    className={`bg-colorPreset5 flex aspect-square flex-1 items-center justify-center rounded-full p-1 text-sm text-colorPreset1 hover:scale-110 hover:bg-colorPreset2 active:scale-90 md:w-12 md:text-xl md:font-semibold`}
+                    href={url}
+                    target="_blank"
+                  >
+                    URL
+                  </a>
+                </div>
               </div>
             </div>
-            <motion.figure
-              initial={inital}
-              animate={animate}
-              transition={transition}
-              exit={exit}
-              className={`relative mt-4 aspect-square w-[250px]`}
+            <div
+              className={`flex h-full w-full flex-1 flex-col items-center justify-between gap-6 md:gap-12 landscape:flex-row`}
             >
-              <AnimatePresence initial={false} mode="popLayout">
-                <motion.div
-                  key={href}
-                  initial={{ x: fullScreenGallery ? 0 : 300 }}
-                  animate={{ x: 0 }}
-                  exit={{ x: fullScreenGallery ? 0 : -300, opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className={`relative h-full`}
-                >
-                  <Image
-                    alt={alt}
-                    src={href}
-                    fill
-                    draggable={false}
-                    className={`relative object-contain`}
+              <motion.figure
+                initial={inital}
+                animate={animate}
+                transition={transition}
+                exit={exit}
+                className={`relative flex h-full w-full max-w-[650px] flex-col landscape:flex-1`}
+              >
+                <AnimatePresence initial={false} mode="popLayout">
+                  <motion.div
+                    key={href}
+                    initial={{ x: fullScreenGallery ? 0 : 300 }}
+                    animate={{ x: 0 }}
+                    exit={{ x: fullScreenGallery ? 0 : -300, opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className={`md-landscape:size-[80%] relative size-full lg:size-[70%]`}
+                  >
+                    <Image
+                      alt={alt}
+                      src={href}
+                      fill
+                      draggable={false}
+                      className={`relative object-contain`}
+                      onClick={() => {
+                        setImageIndex((prev) => (prev + 1) % images.length);
+                      }}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+                <div className={`flex w-full items-center justify-between`}>
+                  <figcaption
+                    className={`text-xs font-extralight italic md:-bottom-8 md:text-base`}
+                  >
+                    {`${imageIndex + 1}/${images.length} `} {figcaption}
+                  </figcaption>
+                  <AiOutlineFullscreen
                     onClick={() => {
-                      setImageIndex((prev) => (prev + 1) % images.length);
+                      setFullScreenGallery(true);
                     }}
+                    className={`fill-colorPreset5 size-6 cursor-pointer hover:scale-110 hover:fill-colorPreset2 active:scale-90 md:-bottom-8 md:size-10`}
                   />
-                </motion.div>
-              </AnimatePresence>
-              <AiOutlineFullscreen
-                onClick={() => {
-                  setFullScreenGallery(true);
-                }}
-                className={`fill-colorPreset5 absolute -bottom-5 right-0 size-6`}
-              />
-              <figcaption
-                className={`absolute -bottom-5 text-xs font-extralight italic`}
+                </div>
+              </motion.figure>
+              <div
+                className={`flex flex-col gap-2 md:gap-6 lg:justify-evenly lg:gap-20 landscape:flex-1`}
               >
-                {`${imageIndex + 1}/${images.length} `} {figcaption}
-              </figcaption>
-            </motion.figure>
-            <div className={`flex w-full flex-col`}>
-              <motion.p
-                initial={inital}
-                animate={animate}
-                transition={transition}
-                exit={exit}
-                className={`[&_a]:text-colorPreset5 mt-4 text-pretty text-sm font-extralight leading-6`}
-              >
-                {description}
-              </motion.p>
-            </div>
-            <div className={`flex w-full flex-col gap-3`}>
-              <p className={`text-colorPreset6 text-sm`}>Main Tech Stack</p>
-              <motion.div
-                initial={inital}
-                animate={animate}
-                transition={transition}
-                exit={exit}
-                className={`flex w-full justify-between`}
-              >
-                {techStack.map(({ icon: Icon, text, link }, index) => {
-                  return (
-                    <a
-                      key={index}
-                      href={link}
-                      target="_blank"
-                      className={`flex flex-1 flex-col items-center justify-center text-nowrap`}
-                    >
-                      <Icon className={`size-8`} />
-                      <p className={`text-xs font-extralight`}>{text}</p>
-                    </a>
-                  );
-                })}
-              </motion.div>
+                <div className={`flex w-full flex-col`}>
+                  <motion.p
+                    initial={inital}
+                    animate={animate}
+                    transition={transition}
+                    exit={exit}
+                    className={`[&_a]:text-colorPreset5 text-pretty text-[clamp(0.85rem,_2.5vw,_1.7rem)] font-extralight leading-[clamp(1.5rem,_3.5vh,_3rem)] landscape:text-[clamp(0.85rem,_2.5vh,_1.3rem)] landscape:leading-[clamp(1.5rem,_3.5vw,_3rem)] [&_a]:underline [&_a]:underline-offset-4`}
+                  >
+                    {description}
+                  </motion.p>
+                </div>
+                <div className={`flex w-full flex-col gap-3`}>
+                  <p className={`text-colorPreset6 text-sm md:text-xl`}>
+                    Main Tech Stack
+                  </p>
+                  <motion.div
+                    initial={inital}
+                    animate={animate}
+                    transition={transition}
+                    exit={exit}
+                    className={`flex w-full justify-between`}
+                  >
+                    {techStack.map(({ icon: Icon, text, link }, index) => {
+                      return (
+                        <a
+                          key={index}
+                          href={link}
+                          target="_blank"
+                          className={`flex flex-1 flex-col items-center justify-center text-nowrap`}
+                        >
+                          <Icon
+                            className={`hover:fill-colorPreset5 size-8 active:scale-90 md:size-12`}
+                          />
+                          <p className={`text-xs font-extralight md:text-lg`}>
+                            {text}
+                          </p>
+                        </a>
+                      );
+                    })}
+                  </motion.div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>

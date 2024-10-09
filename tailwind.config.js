@@ -19,6 +19,15 @@ module.exports = {
         poppins: [`var(--font-poppins)`],
         spaceGrotesk: [`var(--font-spaceGrotesk)`],
       },
+      screens: {
+        lg: { raw: "(min-width: 1024px) and (orientation: landscape)" },
+        "lg-portrait": {
+          raw: "(min-width: 1024px) and (orientation: portrait)",
+        },
+        "md-landscape": {
+          raw: "(min-width: 768px) and (orientation: landscape)",
+        },
+      },
     },
   },
   plugins: [],

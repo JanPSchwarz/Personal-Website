@@ -40,9 +40,9 @@ export default function Header({ sectionRefs }) {
 
   return (
     <header
-      className={`fixed top-0 z-10 flex w-full items-center justify-center py-3 backdrop-blur-lg backdrop-opacity-80`}
+      className={`lg-portrait:text-3xl fixed top-0 z-10 flex w-full items-center justify-center py-3 backdrop-blur-lg backdrop-opacity-80 md:text-2xl`}
     >
-      <nav className={`relative flex gap-5`}>
+      <nav className={`relative flex gap-5 md:gap-14 lg:gap-24`}>
         {links.map(({ name, className }, index) => {
           return (
             <p
@@ -53,7 +53,9 @@ export default function Header({ sectionRefs }) {
                   .scrollIntoView({ behaviou: `smooth`, block: `start` });
               }}
               className={
-                className + `${isActive === name && `text-colorPreset5`}`
+                className +
+                `${isActive === name && `text-colorPreset5`}` +
+                ` cursor-pointer`
               }
             >
               {name}

@@ -18,32 +18,34 @@ export default function FullScreenImage({
     >
       <div
         onClick={(event) => event.stopPropagation()}
-        className={`relative flex size-[90%] flex-col items-center justify-center gap-6 rounded-xl bg-colorPreset4 p-4`}
+        className={`relative flex size-[90%] select-none flex-col items-center justify-center gap-6 rounded-xl bg-colorPreset4 p-4`}
       >
         <AiOutlineFullscreenExit
           onClick={() => {
             close();
           }}
-          className={`absolute right-5 top-5 z-10 size-8 fill-gray-800`}
+          className={`hover:fill-colorPreset6 absolute right-5 top-5 z-10 size-8 cursor-pointer fill-gray-800 hover:scale-110 active:scale-90 md:size-12`}
         />
         <div className={`relative flex h-[80%] w-[100%]`}>
           <Image src={href} alt={alt} fill className={`object-contain`} />
         </div>
-        <p className={`text-black`}>{figcaption}</p>
-        <div className={`flex w-full justify-evenly`}>
+        <p className={`select-none text-black md:text-xl`}>{figcaption}</p>
+        <div
+          className={`flex w-full justify-evenly lg:absolute lg:w-[90%] lg:justify-between`}
+        >
           <FaRegArrowAltCircleLeft
             onClick={(event) => {
               event.stopPropagation();
               arrowClick("previous");
             }}
-            className={`size-10 fill-gray-800`}
+            className={`hover:fill-colorPreset5 size-10 cursor-pointer fill-gray-800 hover:scale-110 md:size-14`}
           />
           <FaRegArrowAltCircleLeft
             onClick={(event) => {
               event.stopPropagation();
               arrowClick("next");
             }}
-            className={`size-10 rotate-180 fill-gray-800`}
+            className={`hover:fill-colorPreset5 size-10 rotate-180 cursor-pointer fill-gray-800 hover:scale-110 md:size-14`}
           />
         </div>
       </div>

@@ -13,13 +13,16 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 50px;
   overflow-y: hidden;
 }
 
 body {
   overflow-y: hidden;
   scroll-behavior: smooth;
+}
+
+button:active {
+  transform: scale(0.9);
 }
 
 @layer utilities {

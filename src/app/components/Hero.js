@@ -13,7 +13,7 @@ export default forwardRef(function Hero(props, ref) {
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setCopied(false);
-    }, 2000);
+    }, 2500);
 
     return () => clearTimeout(timeOut);
   }, [copied]);
@@ -21,6 +21,8 @@ export default forwardRef(function Hero(props, ref) {
   function closeMessenger() {
     setShowMessenger(false);
   }
+
+  const sharedIconStyles = `fill-colorPreset6 active:scale-90 cursor-pointer size-10 rotate-[10deg] md:size-16 hover:fill-colorPreset3 hover:scale-[110%]`;
 
   return (
     <>
@@ -34,15 +36,18 @@ export default forwardRef(function Hero(props, ref) {
           Email copied to Clipboard!
         </motion.p>
       )}
+
       <div
         id="home"
         ref={(el) => (ref.current[0] = el)}
-        className={`mx-auto flex h-dvh w-[80%] snap-center flex-col items-center justify-end overflow-x-hidden text-xl`}
+        className={`mx-auto flex h-full w-[80%] max-w-[1200px] snap-start flex-col items-center justify-evenly pt-[50px] text-xl md:justify-around md:pt-[70px] md:text-3xl lg:gap-10 landscape:relative landscape:items-start landscape:justify-center landscape:gap-7`}
       >
         <p className={`w-full text-left`}>
           Hi, ich bin <span className={`text-colorPreset5`}>Jan,</span>
         </p>
-        <div className={`relative left-[8%] aspect-square w-[350px]`}>
+        <div
+          className={`relative left-[8%] aspect-square w-full overflow-hidden md:w-[80%] landscape:absolute landscape:left-[55%] landscape:w-[60%]`}
+        >
           <Image
             src={"/assets/b5792ad4-cutted (1).png"}
             fill
@@ -51,40 +56,38 @@ export default forwardRef(function Hero(props, ref) {
             className={`relative left-5 -rotate-[10deg] object-contain`}
           />
           <div
-            className={`bg-colorPreset5 absolute bottom-[6%] left-[22%] h-[65%] w-[8px] -rotate-[10deg]`}
+            className={`bg-colorPreset5 absolute bottom-[6%] left-[21%] h-[75%] w-[8px] -rotate-[10deg] md:h-[80%]`}
           >
             <div
-              className={`absolute bottom-[5%] right-[285%] flex flex-col gap-4`}
+              className={`absolute bottom-[5%] right-[285%] flex w-[45px] flex-col gap-4 md:w-auto md:gap-8`}
             >
               <IoIosMail
                 onClick={() => {
                   navigator.clipboard.writeText("jan-paul@schw-a-rz.de");
                   setCopied(true);
                 }}
-                className={`fill-colorPreset6 size-10 rotate-[10deg]`}
+                className={sharedIconStyles + ` `}
               />
-              <CVbutton className={`w-9 rotate-[10deg]`} />
+              <CVbutton className={`w-9 rotate-[10deg] md:w-14`} />
               <a
                 href="//www.linkedin.com/in/jan-schwarz-webdeveloper"
                 target="_blank"
               >
-                <FaLinkedin
-                  className={`fill-colorPreset6 size-10 rotate-[10deg]`}
-                />
+                <FaLinkedin className={sharedIconStyles} />
               </a>
               <a href="//github.com/JanPSchwarz" target="_blank">
-                <FaGithub
-                  className={`fill-colorPreset6 size-10 rotate-[10deg]`}
-                />
+                <FaGithub className={sharedIconStyles} />
               </a>
             </div>
           </div>
         </div>
-        <h1 className={`text-center text-5xl font-extrabold text-colorPreset3`}>
+        <h1
+          className={`text-center text-5xl font-extrabold text-colorPreset3 md:text-7xl`}
+        >
           Front-End <span className={`block`}>Developer</span>
         </h1>
         <button
-          className={`bg-colorPreset5 text-colorPreset6 my-8 rounded-lg p-2 px-4 font-extrabold`}
+          className={`bg-colorPreset5 text-colorPreset6 lg-portrait:text-4xl lg-portrait:p-4 rounded-lg p-2 px-4 font-extrabold hover:scale-110 lg:mt-24 lg:text-4xl`}
           onClick={() => setShowMessenger(true)}
         >
           Contact Me

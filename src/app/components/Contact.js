@@ -20,7 +20,7 @@ export default function Contact({ closeMessenger }) {
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setShowReCaptcha(true);
-    }, 350);
+    }, 800);
 
     return () => clearTimeout(timeOut);
   }, []);
@@ -76,9 +76,9 @@ export default function Contact({ closeMessenger }) {
   }
 
   // * shared styled from Form-Elements
-  const inputFieldStyles = `border-2 text-sm border-gray-300 rounded w-full bg-slate-200`;
-  const labelStyles = `w-full text-sm `;
-  const containerStyles = `flex flex-col items-center w-full`;
+  const inputFieldStyles = `border-2 border-gray-300 rounded w-full bg-slate-200`;
+  const labelStyles = `w-full`;
+  const containerStyles = `flex flex-col items-center w-full text-sm md:text-lg lg-portrait:text-2xl`;
   const requiredStyles = ` after:text-colorPreset6 after:content-["*"]`;
 
   // * disables button when input invalid
@@ -92,23 +92,23 @@ export default function Contact({ closeMessenger }) {
     <div
       className={`fixed inset-0 z-20 flex h-screen w-screen flex-col items-center justify-center bg-gray-700 bg-opacity-90`}
     >
-      <IoMdCloseCircle
-        onClick={() => closeMessenger()}
-        className={`fill-colorPreset6 absolute right-5 top-5 size-8`}
-      />
       <motion.div
         initial={{ scale: 0, opacity: 0, y: 200 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className={`size-5/6 overflow-x-hidden overflow-y-scroll rounded-xl bg-colorPreset2 text-colorPreset1`}
+        className={`lg-portrait:max-h-[800px] size-5/6 max-h-[700px] max-w-[1000px] rounded-xl bg-colorPreset2 text-colorPreset1`}
       >
+        <IoMdCloseCircle
+          className={`fill-colorPreset6 absolute -right-5 -top-5 size-8`}
+          onClick={() => closeMessenger()}
+        />
         <form
           onSubmit={(event) => {
             sendEmail(event);
           }}
-          className="flex w-full flex-col items-center justify-start gap-6 p-4"
+          className="relative flex h-full w-full flex-col items-center justify-start gap-6 overflow-x-hidden overflow-y-scroll p-4"
         >
-          <div className={containerStyles}>
+          <div className={containerStyles + ` `}>
             <label htmlFor="name" className={labelStyles}>
               Name
             </label>
@@ -123,7 +123,7 @@ export default function Contact({ closeMessenger }) {
               className={inputFieldStyles}
             />
           </div>
-          <div className={containerStyles}>
+          <div className={containerStyles + ` `}>
             <label htmlFor="email" className={labelStyles + requiredStyles}>
               E-Mail
             </label>
@@ -139,7 +139,7 @@ export default function Contact({ closeMessenger }) {
               className={inputFieldStyles}
             />
           </div>
-          <div className={`relative ` + containerStyles}>
+          <div className={`relative h-full ` + containerStyles}>
             <label htmlFor="message" className={labelStyles + requiredStyles}>
               Nachricht
             </label>
@@ -152,7 +152,7 @@ export default function Contact({ closeMessenger }) {
               onChange={(event) => {
                 changeFormData(event.target.name, event.target.value);
               }}
-              className={`h-52 ` + inputFieldStyles}
+              className={`h-full ` + inputFieldStyles}
             />
             <AnimatePresence>
               {responseMessage && (
@@ -174,7 +174,7 @@ export default function Contact({ closeMessenger }) {
             transition={{ duration: 0.5 }}
             disabled={disableButton}
             type="submit"
-            className={`bg-colorPreset5 flex w-32 justify-center rounded-xl p-2 text-colorPreset2 disabled:opacity-50`}
+            className={`bg-colorPreset5 flex w-32 justify-center rounded-xl p-2 text-colorPreset2 disabled:opacity-50 md:w-40 md:text-xl`}
           >
             {isSendingMail ? (
               <SpinnerSVG className={`size-6 fill-colorPreset2`} />
@@ -186,6 +186,7 @@ export default function Contact({ closeMessenger }) {
             <ReCAPTCHA
               onChange={(event) => setReCaptcha(event)}
               sitekey="6LfRE1sqAAAAAAQwwPFFfOjmzD3pR8JjPXttLSCj"
+              className={`md:scale-125`}
             />
           )}
         </form>
