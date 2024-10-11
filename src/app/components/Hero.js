@@ -5,11 +5,14 @@ import { forwardRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import CVbutton from "@/app/components/CVbutton";
 import Contact from "./Contact";
-import coverPic from "/public/assets/b5792ad4-cutted-1.png";
+import coverPic from "/public/assets/Cover-pic-Jan.webp";
+import getPlaceholder from "../../../utils/getPlaceholder.js";
 
 export default forwardRef(function Hero(props, ref) {
   const [showMessenger, setShowMessenger] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  const [imageLoaded, setImageHasLoaded] = useState(false);
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
@@ -23,7 +26,7 @@ export default forwardRef(function Hero(props, ref) {
     setShowMessenger(false);
   }
 
-  const sharedIconStyles = `fill-colorPreset6 active:scale-90 cursor-pointer size-10 rotate-[10deg] md:size-16 hover:fill-colorPreset3 hover:scale-[110%]`;
+  const sharedIconStyles = `fill-colorPreset6 active:scale-90 cursor-pointer size-10 rotate-[10deg] md:size-16 hover:fill-colorPreset2 hover:scale-[110%]`;
 
   return (
     <>
@@ -51,11 +54,14 @@ export default forwardRef(function Hero(props, ref) {
         >
           <Image
             src={coverPic}
+            placeholder={getPlaceholder(`Cover-pic-Jan.webp`)}
             fill
+            onLoad={() => setImageHasLoaded(true)}
             alt="Bild von Jan"
             sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
             priority
-            className={`relative left-5 -rotate-[10deg] object-contain`}
+            className={`relative left-5 -rotate-[10deg] object-contain ${!imageLoaded && `blur-sm`} transition-all`}
+            style={{ objectFit: "contain" }}
           />
           <div
             className={`bg-colorPreset5 absolute bottom-[6%] left-[21%] h-[75%] w-[8px] -rotate-[10deg] md:h-[80%]`}

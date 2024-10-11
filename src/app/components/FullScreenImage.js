@@ -1,14 +1,22 @@
 import Image from "next/image";
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { AiOutlineFullscreenExit } from "react-icons/ai";
+import { useEffect, useState } from "react";
 
 export default function FullScreenImage({
   href,
+  placeholder,
   figcaption,
   alt,
   arrowClick,
   close,
 }) {
+  const [imageLoaded, setImageHasLoaded] = useState(false);
+
+  useEffect(() => {
+    setImageHasLoaded(false);
+  }, [href]);
+
   return (
     <div
       onClick={() => {
@@ -27,7 +35,18 @@ export default function FullScreenImage({
           className={`hover:fill-colorPreset6 absolute right-5 top-5 z-10 size-8 cursor-pointer fill-gray-800 hover:scale-110 active:scale-90 md:size-12`}
         />
         <div className={`relative flex h-[80%] w-[100%]`}>
-          <Image src={href} alt={alt} fill className={`object-contain`} />
+          <Image
+            key={href}
+            src={href}
+            alt={alt}
+            placeholder={placeholder}
+            onLoad={(event) => {
+              setImageHasLoaded(true);
+            }}
+            fill
+            className={`object-contain ${!imageLoaded && `blur-sm`} transition`}
+            style={{ objectFit: "contain" }}
+          />
         </div>
         <p className={`select-none text-black md:text-xl`}>{figcaption}</p>
         <div

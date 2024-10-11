@@ -55,7 +55,7 @@ export default function Header({ sectionRefs }) {
               className={
                 className +
                 `${isActive === name && `text-colorPreset5`}` +
-                ` cursor-pointer`
+                ` hover:text-colorPreset5 cursor-pointer`
               }
             >
               {name}

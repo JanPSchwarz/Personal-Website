@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect } from "react";
 import { FaGithub } from "react-icons/fa";
 import { AiOutlineFullscreen } from "react-icons/ai";
 import Image from "next/image";
@@ -12,6 +12,8 @@ export default forwardRef(function Projects(props, ref) {
   const [projectIndex, setProjectIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
 
+  const [imageLoaded, setImageHasLoaded] = useState();
+
   const [swipe, setSwipe] = useState();
 
   const [fullScreenGallery, setFullScreenGallery] = useState(false);
@@ -19,7 +21,11 @@ export default forwardRef(function Projects(props, ref) {
   const { heading, url, github, description, images, techStack } =
     projectsData[projectIndex];
 
-  const { href, figcaption, alt } = images[imageIndex];
+  const { href, figcaption, alt, hash } = images[imageIndex];
+
+  useEffect(() => {
+    setImageHasLoaded(false);
+  }, [href]);
 
   function nextProject(index) {
     if (typeof index === "number") {
@@ -70,6 +76,7 @@ export default forwardRef(function Projects(props, ref) {
       {fullScreenGallery && (
         <FullScreenImage
           arrowClick={changeImage}
+          placeholder={hash}
           href={href}
           alt={alt}
           figcaption={figcaption}
@@ -148,9 +155,12 @@ export default forwardRef(function Projects(props, ref) {
                     <Image
                       alt={alt}
                       src={href}
+                      placeholder={hash}
                       fill
                       draggable={false}
-                      className={`relative cursor-pointer object-contain`}
+                      onLoad={() => setImageHasLoaded(true)}
+                      className={`relative cursor-pointer object-contain ${!imageLoaded && `blur-md`} transition-all`}
+                      style={{ objectFit: "contain", borderRadius: 10 }}
                       sizes="(max-width: 768px) 70vw, (max-width: 1024px) 50vw, 33vw"
                       onClick={() => {
                         setImageIndex((prev) => (prev + 1) % images.length);
