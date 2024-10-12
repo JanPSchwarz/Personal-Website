@@ -157,8 +157,13 @@ export default function Contact({ closeMessenger }) {
             <div
               className={`mt-1 flex w-full items-start justify-start gap-1 text-xs`}
             >
-              <input required type="checkbox" />
-              <label>
+              <input
+                id="privacy policy"
+                name="privacy policy"
+                required
+                type="checkbox"
+              />
+              <label htmlFor="privacy policy">
                 Hiermit stimme ich zu, dass die Angaben des Formulars als E-Mail
                 zum Websiten Ersteller gesendet werden.{" "}
                 <a

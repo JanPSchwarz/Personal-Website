@@ -4,6 +4,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { forwardRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import CVbutton from "@/app/components/CVbutton";
+import CookieBanner from "./CookieBanner";
 import Contact from "./Contact";
 import coverPic from "/public/assets/Cover-pic-Jan.webp";
 import getPlaceholder from "../../../utils/getPlaceholder.js";
@@ -13,6 +14,11 @@ export default forwardRef(function Hero(props, ref) {
   const [copied, setCopied] = useState(false);
 
   const [imageLoaded, setImageHasLoaded] = useState(false);
+
+  const [pageLoaded, setPageHasLoaded] = useState(false);
+  const [showBanner, setShowBanner] = useState(false);
+
+  console.log(showBanner);
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
@@ -26,10 +32,28 @@ export default forwardRef(function Hero(props, ref) {
     setShowMessenger(false);
   }
 
+  useEffect(() => {
+    setPageHasLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    const banner = sessionStorage.getItem("banner");
+
+    console.log(banner);
+
+    if (!banner) {
+      setShowBanner(true);
+      sessionStorage.setItem("banner", "true");
+    }
+  }, [pageLoaded]);
+
   const sharedIconStyles = `fill-colorPreset6 active:scale-90 cursor-pointer size-10 rotate-[10deg] md:size-16 hover:fill-colorPreset2 hover:scale-[110%]`;
 
   return (
     <>
+      {showBanner && (
+        <CookieBanner buttonFunction={() => setShowBanner(false)} />
+      )}
       {showMessenger && <Contact closeMessenger={closeMessenger} />}
       {copied && (
         <motion.p
