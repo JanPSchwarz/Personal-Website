@@ -154,6 +154,22 @@ export default function Contact({ closeMessenger }) {
               }}
               className={`h-full ` + inputFieldStyles}
             />
+            <div
+              className={`mt-1 flex w-full items-start justify-start gap-1 text-xs`}
+            >
+              <input required type="checkbox" />
+              <label>
+                Hiermit stimme ich zu, dass die Angaben des Formulars als E-Mail
+                zum Websiten Ersteller gesendet werden.{" "}
+                <a
+                  href="/assets/Datenschutz.pdf"
+                  className={`text-cyan-700 underline`}
+                  target="_blank"
+                >
+                  Datenschutzrechtlinien
+                </a>{" "}
+              </label>
+            </div>
             <AnimatePresence>
               {responseMessage && (
                 <motion.p

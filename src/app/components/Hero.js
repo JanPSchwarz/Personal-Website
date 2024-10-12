@@ -81,10 +81,16 @@ export default forwardRef(function Hero(props, ref) {
                 href="//www.linkedin.com/in/jan-schwarz-webdeveloper"
                 target="_blank"
               >
-                <FaLinkedin className={sharedIconStyles} />
+                <FaLinkedin
+                  aria-label="Link to Jan's LinkedIn profile"
+                  className={sharedIconStyles}
+                />
               </a>
               <a href="//github.com/JanPSchwarz" target="_blank">
-                <FaGithub className={sharedIconStyles} />
+                <FaGithub
+                  aria-label="Link to Jan's GitHub profile"
+                  className={sharedIconStyles}
+                />
               </a>
             </div>
           </div>
