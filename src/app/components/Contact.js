@@ -90,7 +90,7 @@ export default function Contact({ closeMessenger }) {
 
   return (
     <div
-      className={`fixed inset-0 z-20 flex h-screen w-screen flex-col items-center justify-center bg-gray-700 bg-opacity-90`}
+      className={`fixed inset-0 z-20 flex h-dvh w-screen flex-col items-center justify-center bg-gray-700 bg-opacity-90`}
     >
       <motion.div
         initial={{ scale: 0, opacity: 0, y: 200 }}

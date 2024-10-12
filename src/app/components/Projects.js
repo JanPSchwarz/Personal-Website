@@ -7,6 +7,7 @@ import { projectsData } from "../../../lib/projectsData";
 import { motion, AnimatePresence } from "framer-motion";
 import FullScreenImage from "./FullScreenImage";
 import { useSwipeable } from "react-swipeable";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 export default forwardRef(function Projects(props, ref) {
   const [projectIndex, setProjectIndex] = useState(0);
@@ -58,7 +59,7 @@ export default forwardRef(function Projects(props, ref) {
     onSwipedLeft: () => nextProject("next"),
     onSwipedRight: () => nextProject("previous"),
     onSwiping: (event) => setSwipe(event.dir),
-    preventScrollOnSwipe: true,
+    preventScrollOnSwipe: false,
     trackMouse: true,
   });
 
@@ -78,6 +79,8 @@ export default forwardRef(function Projects(props, ref) {
           arrowClick={changeImage}
           placeholder={hash}
           href={href}
+          images={images}
+          imageIndex={imageIndex}
           alt={alt}
           figcaption={figcaption}
           close={() => closeFullScreenImage()}
@@ -93,7 +96,8 @@ export default forwardRef(function Projects(props, ref) {
               <div
                 className={`z-10 flex w-full flex-col gap-2 self-start md:-top-6 md:gap-4`}
               >
-                <div className={`flex gap-2`}>
+                <div className={`flex items-center gap-2`}>
+                  {/* <FaArrowLeftLong /> */}
                   {projectsData.map((project, index) => {
                     return (
                       <div
@@ -105,6 +109,7 @@ export default forwardRef(function Projects(props, ref) {
                       ></div>
                     );
                   })}
+                  {/* <FaArrowLeftLong size={18} className={`rotate-180 ml-2`} /> */}
                 </div>
                 <div
                   className={`z-10 flex w-full items-center justify-between gap-2 bg-colorPreset1`}

@@ -10,6 +10,8 @@ export default function FullScreenImage({
   alt,
   arrowClick,
   close,
+  images,
+  imageIndex,
 }) {
   const [imageLoaded, setImageHasLoaded] = useState(false);
 
@@ -22,7 +24,7 @@ export default function FullScreenImage({
       onClick={() => {
         close();
       }}
-      className={`fixed inset-0 z-20 flex h-screen w-screen flex-col items-center justify-center bg-gray-700 bg-opacity-90`}
+      className={`fixed inset-0 z-20 flex h-dvh w-screen flex-col items-center justify-center bg-gray-700 bg-opacity-90`}
     >
       <div
         onClick={(event) => event.stopPropagation()}
@@ -48,7 +50,14 @@ export default function FullScreenImage({
             style={{ objectFit: "contain" }}
           />
         </div>
-        <p className={`select-none text-black md:text-xl`}>{figcaption}</p>
+        <p
+          className={`relative w-full max-w-[800px] select-none text-center text-black md:text-xl`}
+        >
+          <span
+            className={`absolute -top-5 left-0 font-extralight italic`}
+          >{`${imageIndex + 1}/${images.length}`}</span>
+          {figcaption}
+        </p>
         <div
           className={`flex w-full justify-evenly lg:absolute lg:w-[90%] lg:justify-between`}
         >

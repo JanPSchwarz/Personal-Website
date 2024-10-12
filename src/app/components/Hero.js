@@ -16,9 +16,7 @@ export default forwardRef(function Hero(props, ref) {
   const [imageLoaded, setImageHasLoaded] = useState(false);
 
   const [pageLoaded, setPageHasLoaded] = useState(false);
-  const [showBanner, setShowBanner] = useState(false);
-
-  console.log(showBanner);
+  const [showBanner, setShowBanner] = useState(true);
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
@@ -38,8 +36,6 @@ export default forwardRef(function Hero(props, ref) {
 
   useEffect(() => {
     const banner = sessionStorage.getItem("banner");
-
-    console.log(banner);
 
     if (!banner) {
       setShowBanner(true);
@@ -91,7 +87,7 @@ export default forwardRef(function Hero(props, ref) {
             className={`bg-colorPreset5 absolute bottom-[6%] left-[21%] h-[75%] w-[8px] -rotate-[10deg] md:h-[80%]`}
           >
             <div
-              className={`absolute bottom-[5%] right-[285%] flex w-[45px] flex-col gap-4 md:w-auto md:gap-8`}
+              className={`absolute bottom-[5%] right-[285%] flex w-[35px] flex-col gap-4 md:w-auto md:gap-8`}
             >
               <IoIosMail
                 onClick={() => {
@@ -100,7 +96,8 @@ export default forwardRef(function Hero(props, ref) {
                 }}
                 className={sharedIconStyles + ` `}
               />
-              <CVbutton className={`w-9 rotate-[10deg] md:w-14`} />
+              <CVbutton className={`w-[33px] rotate-[10deg] md:w-14`} />
+
               <a
                 href="//www.linkedin.com/in/jan-schwarz-webdeveloper"
                 target="_blank"
