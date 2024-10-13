@@ -1,4 +1,6 @@
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 
 import { Poppins, Space_Grotesk } from "next/font/google";
 
@@ -27,6 +29,8 @@ export default function RootLayout({ children }) {
     >
       <body className={`bg-colorPreset1 font-poppins text-colorPreset2`}>
         {children}
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
