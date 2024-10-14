@@ -12,11 +12,15 @@ export default function FullScreenImage({
   close,
   images,
   imageIndex,
+  cachedImages,
+  handleCacheImages,
 }) {
+  //* same as in Projects.js: applies blur when setted to false
   const [imageLoaded, setImageHasLoaded] = useState(false);
 
   useEffect(() => {
-    setImageHasLoaded(false);
+    if (cachedImages.includes(href)) return;
+    else setImageHasLoaded(false);
   }, [href]);
 
   return (
@@ -65,6 +69,7 @@ export default function FullScreenImage({
             onClick={(event) => {
               event.stopPropagation();
               arrowClick("previous");
+              handleCacheImages();
             }}
             className={`hover:fill-colorPreset5 size-10 cursor-pointer fill-gray-800 hover:scale-110 md:size-14`}
           />
@@ -72,6 +77,7 @@ export default function FullScreenImage({
             onClick={(event) => {
               event.stopPropagation();
               arrowClick("next");
+              handleCacheImages();
             }}
             className={`hover:fill-colorPreset5 size-10 rotate-180 cursor-pointer fill-gray-800 hover:scale-110 md:size-14`}
           />

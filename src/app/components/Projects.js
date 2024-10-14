@@ -7,25 +7,60 @@ import { projectsData } from "../../../lib/projectsData";
 import { motion, AnimatePresence } from "framer-motion";
 import FullScreenImage from "./FullScreenImage";
 import { useSwipeable } from "react-swipeable";
-import { FaArrowLeftLong } from "react-icons/fa6";
+import { MdTouchApp } from "react-icons/md";
 
 export default forwardRef(function Projects(props, ref) {
   const [projectIndex, setProjectIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
 
-  const [imageLoaded, setImageHasLoaded] = useState();
+  //* add blur on images when image is loading
+  const [imageLoaded, setImageHasLoaded] = useState(false);
+
+  //* stores images which were loaded before by func handleCachedImages
+  const [previouslyLoadedImages, setPreviousLoadedImages] = useState([]);
+  //* same logic for images rendered by FullScreenImage.js
+  //* stored here to survive unmount
+  const [previouslyLoadedFullscreenImages, setPreviousLoadedFullscreenImages] =
+    useState([]);
 
   const [swipe, setSwipe] = useState();
 
   const [fullScreenGallery, setFullScreenGallery] = useState(false);
+
+  const [showTouchIcon, setShowTouchIcon] = useState(true);
 
   const { heading, url, github, description, images, techStack } =
     projectsData[projectIndex];
 
   const { href, figcaption, alt, hash } = images[imageIndex];
 
+  //* sets imageLoaded useState false if image is loaded first time/isn't cached -> applies blur
   useEffect(() => {
-    setImageHasLoaded(false);
+    if (previouslyLoadedImages.includes(href)) return;
+    else setImageHasLoaded(false);
+  }, [href]);
+
+  //* is not a real cache: href is stored to useState "previouslyLoaded..."
+  //* images are cached by default for 1 hr -> see next.config.mjs
+  function handleCachedImages() {
+    if (previouslyLoadedImages.includes(href)) return;
+    else setPreviousLoadedImages((prev) => [...prev, href]);
+  }
+
+  //* same for images rendered in FullScreenImage.js
+  function handleCachedFullScreenImages() {
+    if (previouslyLoadedFullscreenImages.includes(href)) return;
+    else setPreviousLoadedFullscreenImages((prev) => [...prev, href]);
+  }
+
+  //* handles touchIcon visbility
+  useEffect(() => {
+    setShowTouchIcon(false);
+    const timeOut = setTimeout(() => {
+      setShowTouchIcon(true);
+    }, 3000);
+
+    return () => clearTimeout(timeOut);
   }, [href]);
 
   function nextProject(index) {
@@ -63,6 +98,7 @@ export default forwardRef(function Projects(props, ref) {
     trackMouse: true,
   });
 
+  //* shared swipe animations for motion elements
   const animation = {
     inital: { x: swipe === "Left" ? 300 : -300, opacity: 0 },
     animate: { x: 0, opacity: 1 },
@@ -83,6 +119,8 @@ export default forwardRef(function Projects(props, ref) {
           imageIndex={imageIndex}
           alt={alt}
           figcaption={figcaption}
+          cachedImages={previouslyLoadedFullscreenImages}
+          handleCacheImages={handleCachedFullScreenImages}
           close={() => closeFullScreenImage()}
         />
       )}
@@ -97,7 +135,6 @@ export default forwardRef(function Projects(props, ref) {
                 className={`z-10 flex w-full flex-col gap-2 self-start md:-top-6 md:gap-4`}
               >
                 <div className={`flex items-center gap-2`}>
-                  {/* <FaArrowLeftLong /> */}
                   {projectsData.map((project, index) => {
                     return (
                       <div
@@ -109,7 +146,6 @@ export default forwardRef(function Projects(props, ref) {
                       ></div>
                     );
                   })}
-                  {/* <FaArrowLeftLong size={18} className={`rotate-180 ml-2`} /> */}
                 </div>
                 <div
                   className={`z-10 flex w-full items-center justify-between gap-2 bg-colorPreset1`}
@@ -163,7 +199,10 @@ export default forwardRef(function Projects(props, ref) {
                       placeholder={hash}
                       fill
                       draggable={false}
-                      onLoad={() => setImageHasLoaded(true)}
+                      onLoad={(event) => {
+                        setImageHasLoaded(true);
+                        handleCachedImages();
+                      }}
                       className={`relative cursor-pointer object-contain ${!imageLoaded && `blur-md`} transition-all`}
                       style={{ objectFit: "contain", borderRadius: 10 }}
                       sizes="(max-width: 768px) 70vw, (max-width: 1024px) 50vw, 33vw"
@@ -173,6 +212,9 @@ export default forwardRef(function Projects(props, ref) {
                     />
                   </motion.div>
                 </AnimatePresence>
+                <MdTouchApp
+                  className={`fill-colorPreset5 absolute transition ${!showTouchIcon && `opacity-0`} bottom-[10%] right-[10%] size-6 -rotate-[25deg] md:size-8 landscape:bottom-[30%]`}
+                />
                 <div className={`flex w-full items-center justify-between`}>
                   <figcaption
                     className={`text-xs font-extralight italic md:-bottom-8 md:text-base`}

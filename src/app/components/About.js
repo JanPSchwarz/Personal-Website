@@ -82,8 +82,8 @@ export default forwardRef(function About(prop, ref) {
         </div>
         <div className={`flex h-full items-center justify-center`}>
           <div className={`flex flex-wrap justify-center gap-6`}>
-            {icons.map((Icon) => {
-              return <Icon className={`size-16`} />;
+            {icons.map((Icon, index) => {
+              return <Icon key={index} className={`size-16`} />;
             })}
           </div>
         </div>

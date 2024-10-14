@@ -10,6 +10,9 @@ const nextConfig = {
     });
     return config;
   },
+  images: {
+    minimumCacheTTL: 3600,
+  },
 };
 
 const withBundleAnalyzer = bundleAnalyzer({
