@@ -199,7 +199,7 @@ export default forwardRef(function Projects(props, ref) {
                       placeholder={hash}
                       fill
                       draggable={false}
-                      onLoad={(event) => {
+                      onLoad={() => {
                         setImageHasLoaded(true);
                         handleCachedImages();
                       }}

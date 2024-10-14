@@ -10,6 +10,8 @@ const nextConfig = {
     });
     return config;
   },
+
+  //* caches images for 1hr by default
   images: {
     minimumCacheTTL: 3600,
   },
