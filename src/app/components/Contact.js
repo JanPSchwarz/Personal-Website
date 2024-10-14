@@ -99,7 +99,7 @@ export default function Contact({ closeMessenger }) {
         className={`lg-portrait:max-h-[800px] size-5/6 max-h-[700px] max-w-[1000px] rounded-xl bg-colorPreset2 text-colorPreset1`}
       >
         <IoMdCloseCircle
-          className={`fill-colorPreset6 absolute -right-5 -top-5 size-8`}
+          className={`fill-colorPreset6 absolute -right-5 -top-5 size-8 cursor-pointer hover:scale-110`}
           onClick={() => closeMessenger()}
         />
         <form

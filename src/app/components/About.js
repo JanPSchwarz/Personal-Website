@@ -1,7 +1,41 @@
 import CVbutton from "./CVbutton";
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
+import { SiMongodb } from "react-icons/si";
+import { AiOutlineJavaScript } from "react-icons/ai";
+import { TbBrandNextjs } from "react-icons/tb";
+import { FaReact, FaHtml5, FaCss3Alt } from "react-icons/fa6";
+import { SiStyledcomponents } from "react-icons/si";
+import { RiTailwindCssFill } from "react-icons/ri";
+import { FaNode } from "react-icons/fa";
 
 export default forwardRef(function About(prop, ref) {
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    function detectMobile() {
+      if (window.innerWidth >= 768) setIsMobile(false);
+      else setIsMobile(true);
+    }
+
+    detectMobile();
+
+    window.addEventListener(`resize`, detectMobile);
+
+    return () => window.removeEventListener(`resize`, detectMobile);
+  }, []);
+
+  const icons = [
+    TbBrandNextjs,
+    AiOutlineJavaScript,
+    FaReact,
+    SiMongodb,
+    FaNode,
+    FaHtml5,
+    FaCss3Alt,
+    SiStyledcomponents,
+    RiTailwindCssFill,
+  ];
+
   return (
     <div
       id="about"
@@ -45,6 +79,13 @@ export default forwardRef(function About(prop, ref) {
             . Doch damit nicht genug – ich lerne gerade fleißig TypeScript, um
             mein Wissen weiter auszubauen.
           </p>
+        </div>
+        <div className={`flex h-full items-center justify-center`}>
+          <div className={`flex flex-wrap justify-center gap-6`}>
+            {icons.map((Icon) => {
+              return <Icon className={`size-16`} />;
+            })}
+          </div>
         </div>
       </div>
     </div>

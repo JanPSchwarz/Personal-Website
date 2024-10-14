@@ -122,7 +122,7 @@ export default forwardRef(function Hero(props, ref) {
           Front-End <span className={`block`}>Developer</span>
         </h1>
         <button
-          className={`bg-colorPreset5 text-colorPreset6 lg-portrait:text-4xl lg-portrait:p-4 rounded-lg p-2 px-4 font-extrabold hover:scale-110 lg:mt-24 lg:text-4xl`}
+          className={`bg-colorPreset5 text-colorPreset6 lg-portrait:text-4xl lg-portrait:p-4 rounded-lg p-2 px-4 font-extrabold saturate-[0.9] hover:scale-110 lg:mt-24 lg:text-4xl`}
           onClick={() => setShowMessenger(true)}
         >
           Contact Me

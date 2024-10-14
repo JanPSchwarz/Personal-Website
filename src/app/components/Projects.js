@@ -202,7 +202,7 @@ export default forwardRef(function Projects(props, ref) {
                   </motion.p>
                 </div>
                 <div className={`flex w-full flex-col gap-3`}>
-                  <p className={`text-colorPreset6 text-sm md:text-xl`}>
+                  <p className={`text-sm text-colorPreset3 md:text-xl`}>
                     Main Tech Stack
                   </p>
                   <motion.div
@@ -221,7 +221,7 @@ export default forwardRef(function Projects(props, ref) {
                           className={`flex flex-1 flex-col items-center justify-center text-nowrap`}
                         >
                           <Icon
-                            className={`hover:fill-colorPreset5 size-8 active:scale-90 md:size-12`}
+                            className={`hover:fill-colorPreset5 size-8 fill-colorPreset2 active:scale-90 md:size-12`}
                           />
                           <p className={`text-xs font-extralight md:text-lg`}>
                             {text}

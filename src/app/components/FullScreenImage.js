@@ -42,7 +42,7 @@ export default function FullScreenImage({
             src={href}
             alt={alt}
             placeholder={placeholder}
-            onLoad={(event) => {
+            onLoad={() => {
               setImageHasLoaded(true);
             }}
             fill
