@@ -132,7 +132,7 @@ export default forwardRef(function Projects(props, ref) {
         <AnimatePresence initial={false} mode="wait">
           <motion.div
             key={heading}
-            className={`mx-auto flex h-full w-[85%] max-w-[1200px] snap-start flex-col items-center justify-evenly gap-4 py-4 pt-[60px] md:pt-[80px] lg:gap-10`}
+            className={`mx-auto flex h-full w-[85%] max-w-[1500px] snap-start flex-col items-center justify-evenly gap-4 py-4 pt-[60px] md:pt-[80px] lg:gap-10 lg:pb-10`}
           >
             <div className={`flex w-screen px-4 md:w-full`}>
               <div
@@ -169,7 +169,7 @@ export default forwardRef(function Projects(props, ref) {
                       animate={animate}
                       transition={transition}
                       exit={exit}
-                      className={`text-nowrap text-center text-[clamp(1.6rem,_7vw,_2.5rem)] font-extrabold text-colorPreset3`}
+                      className={`text-nowrap text-center text-[clamp(1.6rem,_7vw,_2.5rem)] font-extrabold text-colorPreset3 landscape:text-[clamp(1.6rem,_7vh,_2.5rem)]`}
                     >
                       {heading}
                     </motion.h2>
@@ -199,14 +199,14 @@ export default forwardRef(function Projects(props, ref) {
               </div>
             </div>
             <div
-              className={`flex h-full w-full flex-1 flex-col items-center justify-between gap-6 md:gap-12 landscape:flex-row`}
+              className={`flex h-full w-full flex-1 flex-col items-center justify-between gap-6 md:gap-10 landscape:max-h-[800px] landscape:flex-row`}
             >
               <motion.figure
                 initial={inital}
                 animate={animate}
                 transition={transition}
                 exit={exit}
-                className={`relative flex h-full w-full max-w-[650px] flex-col landscape:flex-1`}
+                className={`relative flex h-full w-full max-w-[650px] flex-col items-center justify-center landscape:flex-1`}
               >
                 <AnimatePresence initial={false} mode="popLayout">
                   <motion.div
@@ -215,7 +215,7 @@ export default forwardRef(function Projects(props, ref) {
                     animate={{ x: 0 }}
                     exit={{ x: fullScreenGallery ? 0 : -300, opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className={`md-landscape:size-[80%] relative size-full lg:size-[70%]`}
+                    className={`relative size-full`}
                   >
                     <Image
                       alt={alt}
@@ -254,7 +254,7 @@ export default forwardRef(function Projects(props, ref) {
                 </div>
               </motion.figure>
               <div
-                className={`flex flex-col gap-2 md:gap-6 lg:justify-evenly lg:gap-20 landscape:flex-1`}
+                className={`flex flex-col gap-2 md:gap-8 landscape:h-full landscape:flex-1 landscape:justify-around`}
               >
                 <div className={`flex w-full flex-col`}>
                   <motion.p
@@ -269,14 +269,14 @@ export default forwardRef(function Projects(props, ref) {
                 </div>
                 <div className={`flex w-full flex-col gap-3`}>
                   <p className={`text-sm text-colorPreset3 md:text-xl`}>
-                    Main Tech Stack
+                    Verwendete Technologien
                   </p>
                   <motion.div
                     initial={inital}
                     animate={animate}
                     transition={transition}
                     exit={exit}
-                    className={`flex w-full justify-between`}
+                    className={`flex w-full justify-around gap-2 overflow-x-scroll landscape:justify-between`}
                   >
                     {techStack.map(({ icon: Icon, text, link }, index) => {
                       return (
@@ -287,9 +287,11 @@ export default forwardRef(function Projects(props, ref) {
                           className={`flex flex-1 flex-col items-center justify-center text-nowrap`}
                         >
                           <Icon
-                            className={`hover:fill-colorPreset5 size-8 fill-colorPreset2 active:scale-90 md:size-12`}
+                            className={`hover:fill-colorPreset5 size-[clamp(0.8rem,_8vw,_3.5rem)] fill-colorPreset2 active:scale-90 landscape:size-[clamp(0.8rem,_10vh,_2.8rem)]`}
                           />
-                          <p className={`text-xs font-extralight md:text-lg`}>
+                          <p
+                            className={`text-[clamp(0.8rem,_2.3vw,_1.2rem)] font-extralight landscape:text-[clamp(0.7rem,_2.1vh,_1.2rem)]`}
+                          >
                             {text}
                           </p>
                         </a>

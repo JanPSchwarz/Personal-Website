@@ -1,6 +1,11 @@
 import Image from "next/image";
 import { IoIosMail } from "react-icons/io";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { TiSocialLinkedinCircular } from "react-icons/ti";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { BiSolidEnvelope } from "react-icons/bi";
+
+import { MdAlternateEmail } from "react-icons/md";
+
 import { forwardRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import CVbutton from "@/app/components/CVbutton";
@@ -43,8 +48,6 @@ export default forwardRef(function Hero(props, ref) {
     }
   }, [pageLoaded]);
 
-  const sharedIconStyles = `fill-colorPreset6 active:scale-90 cursor-pointer size-10 rotate-[10deg] md:size-16 hover:fill-colorPreset2 hover:scale-[110%]`;
-
   return (
     <>
       {showBanner && (
@@ -70,7 +73,7 @@ export default forwardRef(function Hero(props, ref) {
           Hi, ich bin <span className={`text-colorPreset5`}>Jan,</span>
         </p>
         <div
-          className={`relative left-[8%] aspect-square w-full overflow-hidden md:w-[80%] landscape:absolute landscape:left-[55%] landscape:w-[60%]`}
+          className={`relative left-[8%] aspect-square w-full overflow-visible md:w-[80%] landscape:absolute landscape:left-[55%] landscape:w-[60%]`}
         >
           <Image
             src={coverPic}
@@ -84,33 +87,38 @@ export default forwardRef(function Hero(props, ref) {
             style={{ objectFit: "contain" }}
           />
           <div
-            className={`bg-colorPreset5 absolute bottom-[6%] left-[21%] h-[75%] w-[8px] -rotate-[10deg] md:h-[80%]`}
+            className={`bg-colorPreset5 absolute bottom-[6%] left-[21%] h-[75%] w-[8px] -rotate-[10deg] overflow-visible md:h-[80%]`}
           >
             <div
-              className={`absolute bottom-[5%] right-[285%] flex w-[35px] flex-col gap-4 md:w-auto md:gap-8`}
+              className={`absolute bottom-[5%] right-[285%] flex w-[35px] flex-col gap-4 overflow-visible md:w-auto md:gap-10`}
             >
-              <IoIosMail
-                onClick={() => {
-                  navigator.clipboard.writeText("jan-paul@schw-a-rz.de");
-                  setCopied(true);
-                }}
-                className={sharedIconStyles + ` `}
-              />
-              <CVbutton className={`w-[33px] rotate-[10deg] md:w-14`} />
+              <div
+                className={`bg-colorPreset6 flex aspect-square size-10 rotate-[10deg] cursor-pointer items-center justify-center overflow-visible rounded-full hover:scale-[110%] hover:bg-colorPreset2 active:scale-90 active:bg-colorPreset2 md:size-16`}
+              >
+                <BiSolidEnvelope
+                  onClick={() => {
+                    navigator.clipboard.writeText("jan-paul@schw-a-rz.de");
+                    setCopied(true);
+                  }}
+                  className={`size-[80%] fill-colorPreset1`}
+                />
+              </div>
+              <CVbutton className={`size-10 rotate-[10deg] md:size-16`} />
 
               <a
                 href="//www.linkedin.com/in/jan-schwarz-webdeveloper"
                 target="_blank"
+                className={`bg-colorPreset6 flex aspect-square size-10 rotate-[10deg] cursor-pointer items-center justify-center rounded-full hover:scale-[110%] hover:bg-colorPreset2 active:scale-90 active:bg-colorPreset2 md:size-16`}
               >
-                <FaLinkedin
+                <FaLinkedinIn
                   aria-label="Link to Jan's LinkedIn profile"
-                  className={sharedIconStyles}
+                  className={`size-[70%] fill-colorPreset1`}
                 />
               </a>
               <a href="//github.com/JanPSchwarz" target="_blank">
                 <FaGithub
                   aria-label="Link to Jan's GitHub profile"
-                  className={sharedIconStyles}
+                  className={`fill-colorPreset6 size-10 rotate-[10deg] cursor-pointer hover:scale-[110%] hover:fill-colorPreset2 active:scale-90 active:fill-colorPreset2 md:size-16`}
                 />
               </a>
             </div>
