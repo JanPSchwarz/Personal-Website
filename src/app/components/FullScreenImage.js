@@ -18,9 +18,7 @@ export default function FullScreenImage({
   const [imageLoaded, setImageHasLoaded] = useState(false);
 
   function handleImageLoad() {
-    setTimeout(() => {
-      setImageHasLoaded(true);
-    }, 300);
+    setImageHasLoaded(true);
   }
 
   return (
@@ -42,8 +40,8 @@ export default function FullScreenImage({
         />
         <div
           className={twMerge(
-            `relative flex h-[80%] w-[100%] blur-md`,
-            imageLoaded && `blur-none`,
+            `relative flex h-[80%] w-[100%] blur-md transition duration-0`,
+            imageLoaded && `blur-none duration-150`,
           )}
         >
           <Image

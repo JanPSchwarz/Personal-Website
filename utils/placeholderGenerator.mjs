@@ -7,7 +7,7 @@ export default async function generateThumbhash(imagePath) {
       .resize(800, 800, {
         fit: `inside`,
       })
-      .blur(1)
+      .blur(0.3)
       .webp({
         quality: 70,
         lossless: false,
