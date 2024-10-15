@@ -80,13 +80,17 @@ export default forwardRef(function About(prop, ref) {
             mein Wissen weiter auszubauen.
           </p>
         </div>
-        <div className={`flex h-full items-center justify-center`}>
-          <div className={`flex flex-wrap justify-center gap-6`}>
-            {icons.map((Icon, index) => {
-              return <Icon key={index} className={`size-16`} />;
-            })}
+        {!isMobile && (
+          <div className={`flex h-full items-center justify-center`}>
+            <div
+              className={`flex w-full flex-wrap justify-center gap-6 lg:justify-around`}
+            >
+              {icons.map((Icon, index) => {
+                return <Icon key={index} className={`size-16`} />;
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
