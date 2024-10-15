@@ -18,10 +18,6 @@ export default forwardRef(function Projects(props, ref) {
 
   //* stores images which were loaded before by func handleCachedImages
   const [previouslyLoadedImages, setPreviousLoadedImages] = useState([]);
-  //* same logic for images rendered by FullScreenImage.js
-  //* stored here to survive unmount
-  const [previouslyLoadedFullscreenImages, setPreviousLoadedFullscreenImages] =
-    useState([]);
 
   const [swipe, setSwipe] = useState();
 
@@ -45,12 +41,6 @@ export default forwardRef(function Projects(props, ref) {
   function handleCachedImages() {
     if (previouslyLoadedImages.includes(href)) return;
     else setPreviousLoadedImages((prev) => [...prev, href]);
-  }
-
-  //* same for images rendered in FullScreenImage.js
-  function handleCachedFullScreenImages() {
-    if (previouslyLoadedFullscreenImages.includes(href)) return;
-    else setPreviousLoadedFullscreenImages((prev) => [...prev, href]);
   }
 
   //* handles touchIcon visbility
@@ -119,8 +109,6 @@ export default forwardRef(function Projects(props, ref) {
           imageIndex={imageIndex}
           alt={alt}
           figcaption={figcaption}
-          cachedImages={previouslyLoadedFullscreenImages}
-          handleCacheImages={handleCachedFullScreenImages}
           close={() => closeFullScreenImage()}
         />
       )}
