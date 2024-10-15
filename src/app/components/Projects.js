@@ -77,7 +77,7 @@ export default forwardRef(function Projects(props, ref) {
   //* calls project change right away if direction hasn't changed
   //* otherwise it'll change the direction useState first which then calls a useEffect triggering changeProjectIndex
   function switchProject(direction) {
-    if (animationDirection === direction) changeProjectIndex("next");
+    if (animationDirection === direction) changeProjectIndex(direction);
     else setAnimationDirection(direction);
   }
 
@@ -209,15 +209,9 @@ export default forwardRef(function Projects(props, ref) {
                 className={`relative flex h-full w-full max-w-[650px] flex-col items-center justify-center landscape:flex-1`}
               >
                 <AnimatePresence initial={false} mode="popLayout">
-                  <motion.div
-                    key={href}
-                    initial={{ x: fullScreenGallery ? 0 : 300 }}
-                    animate={{ x: 0 }}
-                    exit={{ x: fullScreenGallery ? 0 : -300, opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className={`relative size-full`}
-                  >
+                  <div className={`relative size-full`}>
                     <Image
+                      key={href}
                       alt={alt}
                       src={href}
                       placeholder={hash}
@@ -227,14 +221,17 @@ export default forwardRef(function Projects(props, ref) {
                         setImageHasLoaded(true);
                         handleCachedImages();
                       }}
-                      className={`relative cursor-pointer object-contain ${!imageLoaded && `blur-md`} transition-all`}
-                      style={{ objectFit: "contain", borderRadius: 10 }}
+                      className={`relative cursor-pointer object-contain blur-md brightness-110 ${imageLoaded && `blur-none`} transition duration-0 ${imageLoaded && `duration-150`}`}
+                      style={{
+                        objectFit: "contain",
+                        borderRadius: 40,
+                      }}
                       sizes="(max-width: 768px) 70vw, (max-width: 1024px) 50vw, 33vw"
                       onClick={() => {
                         setImageIndex((prev) => (prev + 1) % images.length);
                       }}
                     />
-                  </motion.div>
+                  </div>
                 </AnimatePresence>
                 <MdTouchApp
                   className={`fill-colorPreset5 absolute transition ${!showTouchIcon && `opacity-0`} bottom-[10%] right-[10%] size-6 -rotate-[25deg] md:size-8 landscape:bottom-[30%]`}

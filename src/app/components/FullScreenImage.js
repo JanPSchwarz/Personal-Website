@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { AiOutlineFullscreenExit } from "react-icons/ai";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function FullScreenImage({
   href,
@@ -15,10 +15,6 @@ export default function FullScreenImage({
 }) {
   //* same as in Projects.js: applies blur when setted to false
   const [imageLoaded, setImageHasLoaded] = useState(false);
-
-  useEffect(() => {
-    setImageHasLoaded(false);
-  }, [href]);
 
   function handleImageLoad() {
     setTimeout(() => {
@@ -43,18 +39,22 @@ export default function FullScreenImage({
           }}
           className={`hover:fill-colorPreset6 absolute right-5 top-5 z-10 size-8 cursor-pointer fill-gray-800 hover:scale-110 active:scale-90 md:size-12`}
         />
-        <div className={`relative flex h-[80%] w-[100%]`}>
+        <div
+          className={`relative flex h-[80%] blur-sm ${imageLoaded && `blur-none`} w-[100%] transition duration-0 ${imageLoaded && `duration-150`}`}
+        >
           <Image
             key={href}
             src={href}
             alt={alt}
-            placeholder={placeholder}
+            placeholder={imageLoaded ? undefined : placeholder}
             onLoad={() => {
               handleImageLoad();
             }}
             fill
-            className={`object-contain ${!imageLoaded && `blur-sm`} transition`}
-            style={{ objectFit: "contain" }}
+            className={`object-contain brightness-110`}
+            style={{
+              objectFit: "contain",
+            }}
           />
         </div>
         <p
@@ -72,12 +72,14 @@ export default function FullScreenImage({
             onClick={(event) => {
               event.stopPropagation();
               arrowClick("previous");
+              setImageHasLoaded(false);
             }}
             className={`hover:fill-colorPreset5 size-10 cursor-pointer fill-gray-800 hover:scale-110 md:size-14`}
           />
           <FaRegArrowAltCircleLeft
             onClick={(event) => {
               event.stopPropagation();
+              setImageHasLoaded(false);
               arrowClick("next");
             }}
             className={`hover:fill-colorPreset5 size-10 rotate-180 cursor-pointer fill-gray-800 hover:scale-110 md:size-14`}

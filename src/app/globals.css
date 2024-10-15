@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --colorPreset1: 45, 42, 42;
+  --colorPreset1: 55, 52, 52;
   --colorPreset2: 255, 255, 255;
   --colorPreset3: 166, 187, 204;
   --colorPreset4: 217, 217, 217;
