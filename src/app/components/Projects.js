@@ -9,6 +9,7 @@ import { FaGithub } from "react-icons/fa";
 import { AiOutlineFullscreen } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
 import { MdTouchApp } from "react-icons/md";
+import { twMerge } from "tailwind-merge";
 
 export default forwardRef(function Projects(props, ref) {
   const [projectIndex, setProjectIndex] = useState(0);
@@ -16,9 +17,6 @@ export default forwardRef(function Projects(props, ref) {
 
   //* add blur on images when image is loading
   const [imageLoaded, setImageHasLoaded] = useState(false);
-
-  //* stores images which were loaded before by func handleCachedImages
-  const [previouslyLoadedImages, setPreviousLoadedImages] = useState([]);
 
   //* detects "direction" to adjust animation of project Change
   const [animationDirection, setAnimationDirection] = useState();
@@ -31,19 +29,6 @@ export default forwardRef(function Projects(props, ref) {
     projectsData[projectIndex];
 
   const { href, figcaption, alt, hash } = images[imageIndex];
-
-  //* sets imageLoaded useState false if image is loaded first time/isn't cached -> applies blur
-  useEffect(() => {
-    if (previouslyLoadedImages.includes(href)) return;
-    else setImageHasLoaded(false);
-  }, [href]);
-
-  //* is not a real cache: href is stored to useState "previouslyLoaded..."
-  //* images are cached by default for 1 hr -> see next.config.mjs
-  function handleCachedImages() {
-    if (previouslyLoadedImages.includes(href)) return;
-    else setPreviousLoadedImages((prev) => [...prev, href]);
-  }
 
   //* handles touchIcon visbility
   useEffect(() => {
@@ -209,19 +194,24 @@ export default forwardRef(function Projects(props, ref) {
                 className={`relative flex h-full w-full max-w-[650px] flex-col items-center justify-center landscape:flex-1`}
               >
                 <AnimatePresence initial={false} mode="popLayout">
-                  <div className={`relative size-full`}>
+                  <div
+                    className={twMerge(
+                      `relative size-full blur-md transition duration-0`,
+                      imageLoaded && `blur-none duration-150`,
+                    )}
+                  >
                     <Image
                       key={href}
                       alt={alt}
                       src={href}
-                      placeholder={hash}
+                      placeholder={"blur"}
+                      blurDataURL={hash}
                       fill
                       draggable={false}
                       onLoad={() => {
                         setImageHasLoaded(true);
-                        handleCachedImages();
                       }}
-                      className={`relative cursor-pointer object-contain blur-md brightness-110 ${imageLoaded && `blur-none`} transition duration-0 ${imageLoaded && `duration-150`}`}
+                      className={`relative cursor-pointer object-contain brightness-110`}
                       style={{
                         objectFit: "contain",
                         borderRadius: 40,
@@ -229,6 +219,7 @@ export default forwardRef(function Projects(props, ref) {
                       sizes="(max-width: 768px) 70vw, (max-width: 1024px) 50vw, 33vw"
                       onClick={() => {
                         setImageIndex((prev) => (prev + 1) % images.length);
+                        setImageHasLoaded(false);
                       }}
                     />
                   </div>

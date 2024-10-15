@@ -2,6 +2,7 @@ import Image from "next/image";
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { AiOutlineFullscreenExit } from "react-icons/ai";
 import { useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 export default function FullScreenImage({
   href,
@@ -40,13 +41,17 @@ export default function FullScreenImage({
           className={`hover:fill-colorPreset6 absolute right-5 top-5 z-10 size-8 cursor-pointer fill-gray-800 hover:scale-110 active:scale-90 md:size-12`}
         />
         <div
-          className={`relative flex h-[80%] blur-sm ${imageLoaded && `blur-none`} w-[100%] transition duration-0 ${imageLoaded && `duration-150`}`}
+          className={twMerge(
+            `relative flex h-[80%] w-[100%] blur-md`,
+            imageLoaded && `blur-none`,
+          )}
         >
           <Image
             key={href}
             src={href}
             alt={alt}
-            placeholder={imageLoaded ? undefined : placeholder}
+            placeholder="blur"
+            blurDataURL={placeholder}
             onLoad={() => {
               handleImageLoad();
             }}
