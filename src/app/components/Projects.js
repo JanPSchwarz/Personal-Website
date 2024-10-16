@@ -233,7 +233,7 @@ export default forwardRef(function Projects(props, ref) {
                   </div>
                 </AnimatePresence>
                 <MdTouchApp
-                  className={`fill-colorPreset5 absolute transition ${!showTouchIcon && `opacity-0`} bottom-[10%] right-[10%] size-6 -rotate-[25deg] md:size-8 landscape:bottom-[30%]`}
+                  className={`fill-colorPreset5 outline-colorPreset5 absolute rounded-full outline outline-2 outline-offset-2 transition ${!showTouchIcon && `opacity-0`} bottom-[10%] right-[10%] size-6 -rotate-[25deg] md:size-8 landscape:bottom-[30%]`}
                 />
                 <div className={`flex w-full items-center justify-between`}>
                   <figcaption

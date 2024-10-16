@@ -49,7 +49,7 @@ export default forwardRef(function About(prop, ref) {
         <CVbutton className={`bg-colorPreset5 mx-1 size-10 md:size-16`} />
       </div>
       <div
-        className={`[&_a]:text-colorPreset6 [&_strong]:text-colorPreset5 flex h-[90%] flex-col justify-evenly gap-4 text-pretty text-[clamp(0.75rem,_1.7vh,_2rem)] font-light leading-[clamp(1.5rem,_4vh,_4rem)] text-colorPreset2 md:mt-6 md:justify-start landscape:text-[clamp(0.8rem,_1.5vw,_1.2rem)] landscape:leading-[clamp(1.5rem,_4vw,_3rem)] [&_a]:underline [&_a]:underline-offset-4`}
+        className={`[&_a]:text-colorPreset5 [&_strong]:text-colorPreset5 flex h-[90%] flex-col justify-evenly gap-4 text-pretty text-[clamp(0.75rem,_1.7vh,_2rem)] font-light leading-[clamp(1.5rem,_4vh,_4rem)] text-colorPreset2 md:mt-6 md:justify-start landscape:text-[clamp(0.8rem,_1.5vw,_1.2rem)] landscape:leading-[clamp(1.5rem,_4vw,_3rem)] [&_a]:underline [&_a]:underline-offset-4`}
       >
         <div>
           Nach einem Karrierewechsel habe ich mich voll und ganz der
