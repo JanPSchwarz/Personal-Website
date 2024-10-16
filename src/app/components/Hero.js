@@ -83,14 +83,14 @@ export default forwardRef(function Hero(props, ref) {
             alt="Bild von Jan"
             sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
             priority
-            className={`relative left-5 brightness-110 -rotate-[10deg] object-contain ${!imageLoaded && `blur-sm`} transition-all`}
+            className={`relative left-5 -rotate-[10deg] object-contain brightness-110 ${!imageLoaded && `blur-sm`} transition-all`}
             style={{ objectFit: "contain" }}
           />
           <div
             className={`bg-colorPreset5 absolute bottom-[6%] left-[21%] h-[75%] w-[8px] -rotate-[10deg] overflow-visible md:h-[80%]`}
           >
             <div
-              className={`absolute bottom-[5%] right-[285%] flex w-[35px] flex-col gap-4 overflow-visible md:w-auto md:gap-10`}
+              className={`absolute bottom-[5%] right-[285%] flex w-[35px] flex-col gap-4 overflow-visible md:w-auto md:gap-6 lg:gap-10`}
             >
               <div
                 className={`bg-colorPreset6 flex aspect-square size-10 rotate-[10deg] cursor-pointer items-center justify-center overflow-visible rounded-full hover:scale-[110%] hover:bg-colorPreset2 active:scale-90 active:bg-colorPreset2 md:size-16`}

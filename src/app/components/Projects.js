@@ -7,7 +7,7 @@ import FullScreenImage from "./FullScreenImage";
 import { useSwipeable } from "react-swipeable";
 import { FaGithub } from "react-icons/fa";
 import { AiOutlineFullscreen } from "react-icons/ai";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { MdTouchApp } from "react-icons/md";
 import { twMerge } from "tailwind-merge";
 
@@ -142,29 +142,37 @@ export default forwardRef(function Projects(props, ref) {
                   <div
                     className={`flex w-full items-center justify-start md:gap-4 lg:justify-center lg:gap-16`}
                   >
-                    <IoIosArrowBack
-                      aria-label="go to previous project"
-                      className={`size-6 cursor-pointer fill-colorPreset3 hover:scale-110 active:scale-90 md:size-12`}
-                      onClick={() => {
-                        switchProject("previous");
-                      }}
-                    />
-                    <motion.h2
-                      initial={inital}
-                      animate={animate}
-                      transition={transition}
-                      exit={exit}
-                      className={`text-nowrap text-center text-[clamp(1.6rem,_7vw,_2.5rem)] font-extrabold text-colorPreset3 landscape:text-[clamp(1.6rem,_7vh,_2.5rem)]`}
+                    <div
+                      className={`relative flex items-center justify-center gap-1 md:gap-4 landscape:gap-6`}
                     >
-                      {heading}
-                    </motion.h2>
-                    <IoIosArrowBack
-                      aria-label="go to next project"
-                      className={`size-6 rotate-180 cursor-pointer fill-colorPreset3 hover:scale-110 active:scale-90 md:size-12`}
-                      onClick={() => {
-                        switchProject("next");
-                      }}
-                    />
+                      <motion.div layoutId="shiftArrowLef">
+                        <IoIosArrowBack
+                          aria-label="go to previous project"
+                          className={`size-6 cursor-pointer fill-colorPreset3 hover:scale-110 active:scale-90 md:size-12`}
+                          onClick={() => {
+                            switchProject("previous");
+                          }}
+                        />
+                      </motion.div>
+                      <motion.h2
+                        initial={inital}
+                        animate={animate}
+                        transition={transition}
+                        exit={exit}
+                        className={`text-nowrap text-center text-[clamp(1.6rem,_7vw,_2.5rem)] font-extrabold text-colorPreset3 landscape:text-[clamp(1.6rem,_7vh,_2.5rem)]`}
+                      >
+                        {heading}
+                      </motion.h2>
+                      <motion.div layoutId="shiftArrowRight">
+                        <IoIosArrowForward
+                          aria-label="go to next project"
+                          className={`size-6 cursor-pointer fill-colorPreset3 hover:scale-110 active:scale-90 md:size-12`}
+                          onClick={() => {
+                            switchProject("next");
+                          }}
+                        />
+                      </motion.div>
+                    </div>
                   </div>
                   <div className={`flex gap-2`}>
                     <a href={github} target="_blank">
