@@ -78,7 +78,7 @@ export default function Contact({ closeMessenger }) {
   // * shared styled from Form-Elements
   const inputFieldStyles = `border-2 border-gray-300 rounded w-full bg-slate-200`;
   const labelStyles = `w-full`;
-  const containerStyles = `flex flex-col items-center w-full text-sm md:text-lg lg-portrait:text-2xl`;
+  const containerStyles = `flex flex-col items-center w-full text-[1rem] md:text-lg lg-portrait:text-2xl`;
   const requiredStyles = ` after:text-colorPreset6 after:content-["*"]`;
 
   // * disables button when input invalid

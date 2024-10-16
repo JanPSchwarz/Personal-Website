@@ -143,7 +143,7 @@ export default forwardRef(function Projects(props, ref) {
                     className={`flex w-full items-center justify-start md:gap-4 lg:justify-center lg:gap-16`}
                   >
                     <div
-                      className={`relative flex items-center justify-center gap-1 md:gap-4 landscape:gap-6`}
+                      className={`flex place-items-center justify-center gap-1 md:gap-4 landscape:gap-6`}
                     >
                       <motion.div layoutId="shiftArrowLef">
                         <IoIosArrowBack
@@ -258,7 +258,7 @@ export default forwardRef(function Projects(props, ref) {
                     animate={animate}
                     transition={transition}
                     exit={exit}
-                    className={`[&_a]:text-colorPreset5 text-pretty text-[clamp(0.85rem,_2.5vw,_1.7rem)] font-extralight leading-[clamp(1.5rem,_3.5vh,_3rem)] landscape:text-[clamp(0.85rem,_2.5vh,_1.3rem)] landscape:leading-[clamp(1.5rem,_3.5vw,_3rem)] [&_a]:underline [&_a]:underline-offset-4`}
+                    className={`[&_a]:text-colorPreset5 text-pretty text-[clamp(0.85rem,_2.5vw,_1.7rem)] font-light leading-[clamp(1.5rem,_3.5vh,_3rem)] text-colorPreset2 landscape:text-[clamp(0.85rem,_2.5vh,_1.3rem)] landscape:leading-[clamp(1.5rem,_3.5vw,_3rem)] [&_a]:underline [&_a]:underline-offset-4`}
                   >
                     {description}
                   </motion.p>
