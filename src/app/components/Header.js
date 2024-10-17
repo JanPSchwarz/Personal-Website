@@ -38,24 +38,34 @@ export default function Header({ sectionRefs }) {
     { name: `projects`, className: anchorClasses },
   ];
 
+  function navigate(name) {
+    sectionRefs.current
+      .find(({ id }) => id === name)
+      .scrollIntoView({ behaviou: `smooth`, block: `start` });
+  }
+
   return (
     <header
-      className={`lg-portrait:text-3xl fixed top-0 z-10 flex w-full items-center justify-center py-3 backdrop-blur-lg backdrop-opacity-80 md:text-2xl`}
+      className={`fixed top-0 z-10 flex w-full items-center justify-center py-3 backdrop-blur-lg backdrop-opacity-80 md:text-2xl lg-portrait:text-3xl`}
     >
       <nav className={`relative flex gap-5 md:gap-14 lg:gap-24`}>
         {links.map(({ name, className }, index) => {
           return (
             <p
+              tabIndex={0}
+              onKeyDown={(event) => { 
+                if (event.code === "Enter") {
+                  navigate(name);
+                }
+              }}
               key={index}
               onClick={() => {
-                sectionRefs.current
-                  .find(({ id }) => id === name)
-                  .scrollIntoView({ behaviou: `smooth`, block: `start` });
+                navigate(name);
               }}
               className={
                 className +
                 `${isActive === name && `text-colorPreset5`}` +
-                ` hover:text-colorPreset5 cursor-pointer select-none`
+                ` cursor-pointer select-none hover:text-colorPreset5`
               }
             >
               {name}

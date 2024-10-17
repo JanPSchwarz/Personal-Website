@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { AiOutlineFullscreenExit } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 export default function FullScreenImage({
@@ -17,26 +17,45 @@ export default function FullScreenImage({
   //* same as in Projects.js: applies blur when setted to false
   const [imageLoaded, setImageHasLoaded] = useState(false);
 
+  const dialogRef = useRef();
+
+  useEffect(() => {
+    dialogRef.current.showModal();
+    dialogRef.current.focus();
+  }, []);
+
   function handleImageLoad() {
     setImageHasLoaded(true);
   }
 
   return (
-    <div
+    <dialog
+      ref={dialogRef}
       onClick={() => {
         close();
       }}
-      className={`fixed inset-0 z-20 flex h-dvh w-screen flex-col items-center justify-center bg-gray-700 bg-opacity-90`}
+      onKeyDown={(event) => {
+        if (event.code === "Escape") {
+          close();
+        }
+      }}
+      className={`fixed inset-0 z-20 flex h-dvh w-screen flex-col items-center justify-center bg-gray-700 bg-opacity-90 backdrop:bg-gray-700 backdrop:bg-opacity-90`}
     >
       <div
         onClick={(event) => event.stopPropagation()}
         className={`relative flex size-[90%] select-none flex-col items-center justify-center gap-6 rounded-xl bg-colorPreset4 p-4`}
       >
         <AiOutlineFullscreenExit
+          tabIndex={0}
+          onKeyDown={(event) => {
+            if (event.code === "Enter") {
+              close();
+            }
+          }}
           onClick={() => {
             close();
           }}
-          className={`hover:fill-colorPreset6 absolute right-5 top-5 z-10 size-8 cursor-pointer fill-gray-800 hover:scale-110 active:scale-90 md:size-12`}
+          className={`absolute right-5 top-5 z-10 size-8 cursor-pointer fill-gray-800 hover:scale-110 hover:fill-colorPreset6 active:scale-90 md:size-12`}
         />
         <div
           className={twMerge(
@@ -72,23 +91,37 @@ export default function FullScreenImage({
           className={`flex w-full justify-evenly lg:absolute lg:w-[90%] lg:justify-between`}
         >
           <FaRegArrowAltCircleLeft
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.code === "Enter") {
+                arrowClick("previous");
+                setImageHasLoaded(false);
+              }
+            }}
             onClick={(event) => {
               event.stopPropagation();
               arrowClick("previous");
               setImageHasLoaded(false);
             }}
-            className={`hover:fill-colorPreset5 size-10 cursor-pointer fill-gray-800 hover:scale-110 md:size-14`}
+            className={`size-10 cursor-pointer fill-gray-800 hover:scale-110 hover:fill-colorPreset5 md:size-14`}
           />
           <FaRegArrowAltCircleLeft
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.code === "Enter") {
+                arrowClick("next");
+                setImageHasLoaded(false);
+              }
+            }}
             onClick={(event) => {
               event.stopPropagation();
               setImageHasLoaded(false);
               arrowClick("next");
             }}
-            className={`hover:fill-colorPreset5 size-10 rotate-180 cursor-pointer fill-gray-800 hover:scale-110 md:size-14`}
+            className={`size-10 rotate-180 cursor-pointer fill-gray-800 hover:scale-110 hover:fill-colorPreset5 md:size-14`}
           />
         </div>
       </div>
-    </div>
+    </dialog>
   );
 }

@@ -147,8 +147,14 @@ export default forwardRef(function Projects(props, ref) {
                     >
                       <motion.div layoutId="shiftArrowLef">
                         <IoIosArrowBack
+                          tabIndex={0}
+                          onKeyDown={(event) => {
+                            if (event.code === "Enter") {
+                              switchProject("previous");
+                            }
+                          }}
                           aria-label="go to previous project"
-                          className={`size-6 cursor-pointer fill-colorPreset3 hover:scale-110 active:scale-90 md:size-12`}
+                          className={`size-6 cursor-pointer fill-colorPreset3 hover:scale-110 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 active:scale-90 md:size-12`}
                           onClick={() => {
                             switchProject("previous");
                           }}
@@ -165,8 +171,14 @@ export default forwardRef(function Projects(props, ref) {
                       </motion.h2>
                       <motion.div layoutId="shiftArrowRight">
                         <IoIosArrowForward
+                          tabIndex={0}
+                          onKeyDown={(event) => {
+                            if (event.code === "Enter") {
+                              switchProject("next");
+                            }
+                          }}
                           aria-label="go to next project"
-                          className={`size-6 cursor-pointer fill-colorPreset3 hover:scale-110 active:scale-90 md:size-12`}
+                          className={`size-6 cursor-pointer fill-colorPreset3 hover:scale-110 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 active:scale-90 md:size-12`}
                           onClick={() => {
                             switchProject("next");
                           }}
@@ -177,11 +189,11 @@ export default forwardRef(function Projects(props, ref) {
                   <div className={`flex gap-2`}>
                     <a href={github} target="_blank">
                       <FaGithub
-                        className={`fill-colorPreset5 size-8 flex-1 cursor-pointer hover:scale-110 hover:fill-colorPreset2 active:scale-90 md:size-12`}
+                        className={`size-8 flex-1 cursor-pointer fill-colorPreset5 hover:scale-110 hover:fill-colorPreset2 active:scale-90 md:size-12`}
                       />
                     </a>
                     <a
-                      className={`bg-colorPreset5 flex aspect-square flex-1 items-center justify-center rounded-full p-1 text-sm text-colorPreset1 hover:scale-110 hover:bg-colorPreset2 active:scale-90 md:w-12 md:text-xl md:font-semibold`}
+                      className={`flex aspect-square flex-1 items-center justify-center rounded-full bg-colorPreset5 p-1 text-sm text-colorPreset1 hover:scale-110 hover:bg-colorPreset2 active:scale-90 md:w-12 md:text-xl md:font-semibold`}
                       href={url}
                       target="_blank"
                     >
@@ -203,8 +215,15 @@ export default forwardRef(function Projects(props, ref) {
               >
                 <AnimatePresence initial={false} mode="popLayout">
                   <div
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (event.code === "Enter") {
+                        setImageIndex((prev) => (prev + 1) % images.length);
+                        setImageHasLoaded(false);
+                      }
+                    }}
                     className={twMerge(
-                      `relative size-full blur-md transition duration-0`,
+                      `relative size-full blur-md transition duration-0 focus:outline-none focus-visible:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500`,
                       imageLoaded && `blur-none duration-150`,
                     )}
                   >
@@ -233,7 +252,7 @@ export default forwardRef(function Projects(props, ref) {
                   </div>
                 </AnimatePresence>
                 <MdTouchApp
-                  className={`fill-colorPreset5 outline-colorPreset5 absolute rounded-full outline outline-2 outline-offset-2 transition ${!showTouchIcon && `opacity-0`} bottom-[10%] right-[10%] size-6 -rotate-[25deg] md:size-8 landscape:bottom-[30%]`}
+                  className={`absolute rounded-full fill-colorPreset5 outline outline-2 outline-offset-2 outline-colorPreset5 transition ${!showTouchIcon && `opacity-0`} bottom-[30%] right-[10%] size-6 -rotate-[25deg] md:size-8 landscape:bottom-[50%]`}
                 />
                 <div className={`flex w-full items-center justify-between`}>
                   <figcaption
@@ -242,10 +261,16 @@ export default forwardRef(function Projects(props, ref) {
                     {`${imageIndex + 1}/${images.length} `} {figcaption}
                   </figcaption>
                   <AiOutlineFullscreen
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (event.code === "Enter") {
+                        setFullScreenGallery(true);
+                      }
+                    }}
                     onClick={() => {
                       setFullScreenGallery(true);
                     }}
-                    className={`fill-colorPreset5 size-6 cursor-pointer hover:scale-110 hover:fill-colorPreset2 active:scale-90 md:-bottom-8 md:size-10`}
+                    className={`size-6 cursor-pointer fill-colorPreset5 hover:scale-110 hover:fill-colorPreset2 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 active:scale-90 md:-bottom-8 md:size-10`}
                   />
                 </div>
               </motion.figure>
@@ -258,7 +283,7 @@ export default forwardRef(function Projects(props, ref) {
                     animate={animate}
                     transition={transition}
                     exit={exit}
-                    className={`[&_a]:text-colorPreset5 text-pretty text-[clamp(0.85rem,_2.5vw,_1.7rem)] font-light leading-[clamp(1.5rem,_3.5vh,_3rem)] text-colorPreset2 landscape:text-[clamp(0.85rem,_2.5vh,_1.3rem)] landscape:leading-[clamp(1.5rem,_3.5vw,_3rem)] [&_a]:underline [&_a]:underline-offset-4`}
+                    className={`text-pretty text-[clamp(0.85rem,_2.5vw,_1.7rem)] font-light leading-[clamp(1.5rem,_3.5vh,_3rem)] text-colorPreset2 landscape:text-[clamp(0.85rem,_2.5vh,_1.3rem)] landscape:leading-[clamp(1.5rem,_3.5vw,_3rem)] [&_a]:text-colorPreset5 [&_a]:underline [&_a]:underline-offset-4`}
                   >
                     {description}
                   </motion.p>
@@ -283,7 +308,7 @@ export default forwardRef(function Projects(props, ref) {
                           className={`flex flex-1 flex-col items-center justify-center text-nowrap`}
                         >
                           <Icon
-                            className={`hover:fill-colorPreset5 size-[clamp(0.8rem,_8vw,_3.5rem)] fill-colorPreset2 active:scale-90 landscape:size-[clamp(0.8rem,_10vh,_2.8rem)]`}
+                            className={`size-[clamp(0.8rem,_8vw,_3.5rem)] fill-colorPreset2 hover:fill-colorPreset5 active:scale-90 landscape:size-[clamp(0.8rem,_10vh,_2.8rem)]`}
                           />
                           <p
                             className={`text-[clamp(0.8rem,_2.3vw,_1.2rem)] font-extralight landscape:text-[clamp(0.7rem,_2.1vh,_1.2rem)]`}

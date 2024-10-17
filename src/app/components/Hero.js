@@ -87,20 +87,27 @@ export default forwardRef(function Hero(props, ref) {
             style={{ objectFit: "contain" }}
           />
           <div
-            className={`bg-colorPreset5 absolute bottom-[6%] left-[21%] h-[75%] w-[8px] -rotate-[10deg] overflow-visible md:h-[80%]`}
+            className={`absolute bottom-[6%] left-[21%] h-[75%] w-[8px] -rotate-[10deg] overflow-visible bg-colorPreset5 md:h-[80%]`}
           >
             <div
               className={`absolute bottom-[5%] right-[285%] flex w-[35px] flex-col gap-4 overflow-visible md:w-auto md:gap-6 lg:gap-10`}
             >
               <div
-                className={`bg-colorPreset6 flex aspect-square size-10 rotate-[10deg] cursor-pointer items-center justify-center overflow-visible rounded-full hover:scale-[110%] hover:bg-colorPreset2 active:scale-90 active:bg-colorPreset2 md:size-16`}
+                className={`flex aspect-square size-10 rotate-[10deg] cursor-pointer items-center justify-center overflow-visible rounded-full bg-colorPreset6 hover:scale-[110%] hover:bg-colorPreset2 active:scale-90 active:bg-colorPreset2 md:size-16`}
               >
                 <BiSolidEnvelope
+                  tabIndex={0}
+                  onKeyDown={(event) => {
+                    if (event.code === "Enter") {
+                      navigator.clipboard.writeText("jan-paul@schw-a-rz.de");
+                      setCopied(true);
+                    }
+                  }}
                   onClick={() => {
                     navigator.clipboard.writeText("jan-paul@schw-a-rz.de");
                     setCopied(true);
                   }}
-                  className={`size-[80%] fill-colorPreset1`}
+                  className={`size-[80%] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 fill-colorPreset1`}
                 />
               </div>
               <CVbutton className={`size-10 rotate-[10deg] md:size-16`} />
@@ -108,7 +115,7 @@ export default forwardRef(function Hero(props, ref) {
               <a
                 href="//www.linkedin.com/in/jan-schwarz-webdeveloper"
                 target="_blank"
-                className={`bg-colorPreset6 flex aspect-square size-10 rotate-[10deg] cursor-pointer items-center justify-center rounded-full hover:scale-[110%] hover:bg-colorPreset2 active:scale-90 active:bg-colorPreset2 md:size-16`}
+                className={`flex aspect-square size-10 rotate-[10deg] cursor-pointer items-center justify-center rounded-full bg-colorPreset6 hover:scale-[110%] hover:bg-colorPreset2 active:scale-90 active:bg-colorPreset2 md:size-16`}
               >
                 <FaLinkedinIn
                   aria-label="Link to Jan's LinkedIn profile"
@@ -118,7 +125,7 @@ export default forwardRef(function Hero(props, ref) {
               <a href="//github.com/JanPSchwarz" target="_blank">
                 <FaGithub
                   aria-label="Link to Jan's GitHub profile"
-                  className={`fill-colorPreset6 size-10 rotate-[10deg] cursor-pointer hover:scale-[110%] hover:fill-colorPreset2 active:scale-90 active:fill-colorPreset2 md:size-16`}
+                  className={`size-10 rotate-[10deg] cursor-pointer fill-colorPreset6 hover:scale-[110%] hover:fill-colorPreset2 active:scale-90 active:fill-colorPreset2 md:size-16`}
                 />
               </a>
             </div>
@@ -130,7 +137,7 @@ export default forwardRef(function Hero(props, ref) {
           Front-End <span className={`block`}>Developer</span>
         </h1>
         <button
-          className={`bg-colorPreset5 text-colorPreset6 lg-portrait:text-4xl lg-portrait:p-4 rounded-lg p-2 px-4 font-extrabold saturate-[0.9] hover:scale-110 lg:mt-24 lg:text-4xl`}
+          className={`rounded-lg bg-colorPreset5 p-2 px-4 font-extrabold text-colorPreset6 saturate-[0.9] hover:scale-110 lg:mt-24 lg:text-4xl lg-portrait:p-4 lg-portrait:text-4xl`}
           onClick={() => setShowMessenger(true)}
         >
           Contact Me

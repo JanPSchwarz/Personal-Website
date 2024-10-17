@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import { motion, AnimatePresence } from "framer-motion";
 import SpinnerSVG from "../../../public/assets/spinner.svg";
@@ -15,6 +15,13 @@ export default function Contact({ closeMessenger }) {
   const [responseMessage, setResponseMessage] = useState(false);
   const [reCaptcha, setReCaptcha] = useState(null);
   const [showReCaptcha, setShowReCaptcha] = useState(false);
+
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    dialogRef.current.showModal();
+    dialogRef.current.focus();
+  }, []);
 
   //* delays render of reCaptcha because of laggy animation issues when rendering contact.js
   useEffect(() => {
@@ -89,17 +96,31 @@ export default function Contact({ closeMessenger }) {
     !reCaptcha;
 
   return (
-    <div
-      className={`fixed inset-0 z-20 flex h-dvh w-screen flex-col items-center justify-center bg-gray-700 bg-opacity-90`}
+    <dialog
+      tabIndex={0}
+      ref={dialogRef}
+      onKeyDown={(event) => {
+        if (event.key === "Escape") {
+          closeMessenger();
+        }
+      }}
+      className={`fixed inset-0 z-20 flex h-dvh w-screen flex-col items-center justify-center bg-gray-700 bg-opacity-90 backdrop:bg-gray-700 backdrop:bg-opacity-90`}
     >
       <motion.div
         initial={{ scale: 0, opacity: 0, y: 200 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className={`lg-portrait:max-h-[800px] size-5/6 max-h-[700px] max-w-[1000px] rounded-xl bg-colorPreset2 text-colorPreset1`}
+        className={`size-5/6 max-h-[700px] max-w-[1000px] rounded-xl bg-colorPreset2 text-colorPreset1 lg-portrait:max-h-[800px]`}
       >
         <IoMdCloseCircle
-          className={`fill-colorPreset6 absolute -right-5 -top-5 size-8 cursor-pointer hover:scale-110`}
+          onKeyDown={(event) => {
+            if (event.code === "Enter") {
+              closeMessenger();
+            }
+          }}
+          aria-label="Close Modal"
+          tabIndex={0}
+          className={`absolute -right-5 -top-5 size-8 cursor-pointer fill-colorPreset6 hover:scale-110 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500`}
           onClick={() => closeMessenger()}
         />
         <form
@@ -195,7 +216,7 @@ export default function Contact({ closeMessenger }) {
             transition={{ duration: 0.5 }}
             disabled={disableButton}
             type="submit"
-            className={`bg-colorPreset5 flex w-32 justify-center rounded-xl p-2 text-colorPreset2 disabled:opacity-50 md:w-40 md:text-xl`}
+            className={`flex w-32 justify-center rounded-xl bg-colorPreset5 p-2 text-colorPreset2 disabled:opacity-50 md:w-40 md:text-xl`}
           >
             {isSendingMail ? (
               <SpinnerSVG className={`size-6 fill-colorPreset2`} />
@@ -212,6 +233,6 @@ export default function Contact({ closeMessenger }) {
           )}
         </form>
       </motion.div>
-    </div>
+    </dialog>
   );
 }
