@@ -215,18 +215,34 @@ export default forwardRef(function Projects(props, ref) {
               >
                 <AnimatePresence initial={false} mode="popLayout">
                   <div
-                    tabIndex={0}
-                    onKeyDown={(event) => {
-                      if (event.code === "Enter") {
-                        setImageIndex((prev) => (prev + 1) % images.length);
-                        setImageHasLoaded(false);
-                      }
-                    }}
                     className={twMerge(
-                      `relative size-full blur-md transition duration-0 focus:outline-none focus-visible:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500`,
+                      `relative size-full blur-md transition duration-0`,
                       imageLoaded && `blur-none duration-150`,
                     )}
                   >
+                    <div
+                      tabIndex={0}
+                      className={`group absolute left-0 z-10 h-full w-1/2 cursor-pointer focus:outline-none focus-visible:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500`}
+                      onClick={() => {
+                        setImageIndex(
+                          (prev) => (prev - 1 + images.length) % images.length,
+                        );
+                        setImageHasLoaded(false);
+                      }}
+                      onKeyDown={(event) => {
+                        if (event.code === "Enter") {
+                          setImageIndex(
+                            (prev) =>
+                              (prev - 1 + images.length) % images.length,
+                          );
+                          setImageHasLoaded(false);
+                        }
+                      }}
+                    >
+                      <IoIosArrowBack
+                        className={`absolute top-1/2 size-[12%] group-hover:scale-125 group-active:scale-90`}
+                      />
+                    </div>
                     <Image
                       key={href}
                       alt={alt}
@@ -238,17 +254,31 @@ export default forwardRef(function Projects(props, ref) {
                       onLoad={() => {
                         setImageHasLoaded(true);
                       }}
-                      className={`relative cursor-pointer object-contain brightness-110`}
+                      className={`relative object-contain brightness-110`}
                       style={{
                         objectFit: "contain",
                         borderRadius: 40,
                       }}
                       sizes="(max-width: 768px) 70vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <div
+                      tabIndex={0}
+                      className={`group absolute right-0 h-full w-1/2 cursor-pointer transition-none focus:outline-none focus-visible:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500`}
                       onClick={() => {
                         setImageIndex((prev) => (prev + 1) % images.length);
                         setImageHasLoaded(false);
                       }}
-                    />
+                      onKeyDown={(event) => {
+                        if (event.code === "Enter") {
+                          setImageIndex((prev) => (prev + 1) % images.length);
+                          setImageHasLoaded(false);
+                        }
+                      }}
+                    >
+                      <IoIosArrowBack
+                        className={`absolute right-0 top-1/2 size-[12%] rotate-180 transition transition-none group-hover:scale-125 group-active:scale-90`}
+                      />
+                    </div>
                   </div>
                 </AnimatePresence>
                 <MdTouchApp

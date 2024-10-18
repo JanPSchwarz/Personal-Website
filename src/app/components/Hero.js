@@ -1,11 +1,6 @@
 import Image from "next/image";
-import { IoIosMail } from "react-icons/io";
-import { TiSocialLinkedinCircular } from "react-icons/ti";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { BiSolidEnvelope } from "react-icons/bi";
-
-import { MdAlternateEmail } from "react-icons/md";
-
 import { forwardRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import CVbutton from "@/app/components/CVbutton";
@@ -107,7 +102,7 @@ export default forwardRef(function Hero(props, ref) {
                     navigator.clipboard.writeText("jan-paul@schw-a-rz.de");
                     setCopied(true);
                   }}
-                  className={`size-[80%] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 fill-colorPreset1`}
+                  className={`size-[80%] fill-colorPreset1 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500`}
                 />
               </div>
               <CVbutton className={`size-10 rotate-[10deg] md:size-16`} />

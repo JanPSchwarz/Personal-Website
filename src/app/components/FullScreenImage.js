@@ -55,7 +55,7 @@ export default function FullScreenImage({
           onClick={() => {
             close();
           }}
-          className={`absolute right-5 top-5 z-10 size-8 cursor-pointer fill-gray-800 hover:scale-110 hover:fill-colorPreset6 active:scale-90 md:size-12`}
+          className={`absolute right-5 top-5 z-10 size-8 cursor-pointer fill-gray-800 hover:scale-110 hover:fill-colorPreset6 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 active:scale-90 md:size-12`}
         />
         <div
           className={twMerge(
@@ -63,6 +63,13 @@ export default function FullScreenImage({
             imageLoaded && `blur-none duration-150`,
           )}
         >
+          <div
+            className={`absolute left-0 z-10 h-full w-1/2`}
+            onClick={() => {
+              arrowClick("previous");
+              setImageHasLoaded(false);
+            }}
+          />
           <Image
             key={href}
             src={href}
@@ -76,6 +83,13 @@ export default function FullScreenImage({
             className={`object-contain brightness-110`}
             style={{
               objectFit: "contain",
+            }}
+          />
+          <div
+            className={`absolute right-0 h-full w-1/2`}
+            onClick={() => {
+              arrowClick("next");
+              setImageHasLoaded(false);
             }}
           />
         </div>
@@ -103,7 +117,7 @@ export default function FullScreenImage({
               arrowClick("previous");
               setImageHasLoaded(false);
             }}
-            className={`size-10 cursor-pointer fill-gray-800 hover:scale-110 hover:fill-colorPreset5 md:size-14`}
+            className={`size-10 cursor-pointer fill-gray-800 hover:scale-110 hover:fill-colorPreset5 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 md:size-14`}
           />
           <FaRegArrowAltCircleLeft
             tabIndex={0}
@@ -118,7 +132,7 @@ export default function FullScreenImage({
               setImageHasLoaded(false);
               arrowClick("next");
             }}
-            className={`size-10 rotate-180 cursor-pointer fill-gray-800 hover:scale-110 hover:fill-colorPreset5 md:size-14`}
+            className={`size-10 rotate-180 cursor-pointer fill-gray-800 hover:scale-110 hover:fill-colorPreset5 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 md:size-14`}
           />
         </div>
       </div>

@@ -104,13 +104,13 @@ export default function Contact({ closeMessenger }) {
           closeMessenger();
         }
       }}
-      className={`fixed inset-0 z-20 flex h-dvh w-screen flex-col items-center justify-center bg-gray-700 bg-opacity-90 backdrop:bg-gray-700 backdrop:bg-opacity-90`}
+      className={`relative inset-0 -z-10 flex h-dvh items-center justify-center overflow-visible bg-gray-700 bg-opacity-90 backdrop:bg-gray-700 backdrop:bg-opacity-90`}
     >
       <motion.div
         initial={{ scale: 0, opacity: 0, y: 200 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className={`size-5/6 max-h-[700px] max-w-[1000px] rounded-xl bg-colorPreset2 text-colorPreset1 lg-portrait:max-h-[800px]`}
+        className={`relative size-full max-h-[700px] max-w-[1000px] overflow-x-hidden overflow-y-scroll rounded-xl bg-colorPreset2 text-colorPreset1 lg-portrait:max-h-[800px]`}
       >
         <IoMdCloseCircle
           onKeyDown={(event) => {
@@ -120,7 +120,7 @@ export default function Contact({ closeMessenger }) {
           }}
           aria-label="Close Modal"
           tabIndex={0}
-          className={`absolute -right-5 -top-5 size-8 cursor-pointer fill-colorPreset6 hover:scale-110 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500`}
+          className={`absolute right-0 top-0 z-20 size-8 cursor-pointer fill-colorPreset6 hover:scale-110 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500`}
           onClick={() => closeMessenger()}
         />
         <form
