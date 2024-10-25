@@ -4,8 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import SpinnerSVG from "../../../public/assets/spinner.svg";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
-import FocusTrap from "focus-trap-react";
-import { doc } from "prettier";
 
 export default function Contact({ closeMessenger }) {
   const [formData, setFormData] = useState({
