@@ -3,6 +3,9 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { motion, AnimatePresence } from "framer-motion";
 import SpinnerSVG from "../../../public/assets/spinner.svg";
 import ReCAPTCHA from "react-google-recaptcha";
+import axios from "axios";
+import FocusTrap from "focus-trap-react";
+import { doc } from "prettier";
 
 export default function Contact({ closeMessenger }) {
   const [formData, setFormData] = useState({
@@ -13,14 +16,35 @@ export default function Contact({ closeMessenger }) {
 
   const [isSendingMail, setIsSendingMail] = useState(false);
   const [responseMessage, setResponseMessage] = useState(false);
-  const [reCaptcha, setReCaptcha] = useState(null);
+  const [reCaptchaValid, setReCaptchaValid] = useState(false);
   const [showReCaptcha, setShowReCaptcha] = useState(false);
 
-  const dialogRef = useRef(null);
+  const dialogRef = useRef();
 
+  //* showModal() on dialog not possible because google challenge validation gets stuck behind modal-Dialog
+  //* focus-trap
   useEffect(() => {
-    dialogRef.current.showModal();
-    dialogRef.current.focus();
+    const focusableElements = dialogRef.current.querySelectorAll(
+      'button, input, svg, textarea, [href], [tabindex]:not([tabindex="-1"]',
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    function handleTabKey(event) {
+      if (event.key === "Tab") {
+        if (event.shiftKey && document.activeElement === firstElement) {
+          lastElement.focus();
+          event.preventDefault();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          firstElement.focus();
+          event.preventDefault();
+        }
+      }
+    }
+
+    firstElement.focus();
+    document.addEventListener("keydown", handleTabKey);
+    return () => document.removeEventListener("keydown", handleTabKey);
   }, []);
 
   //* delays render of reCaptcha because of laggy animation issues when rendering contact.js
@@ -49,6 +73,21 @@ export default function Contact({ closeMessenger }) {
   function changeFormData(prop, data) {
     setFormData({ ...formData, [prop]: data });
   }
+
+  //* handles reCaptcha-Validation
+  async function onRecaptchaChange(value) {
+    try {
+      const response = await axios.post("/api/contact/verifyReCaptcha", {
+        token: value,
+      });
+      if (response.statusText === "OK") setReCaptchaValid(true);
+    } catch (error) {
+      setReCaptchaValid(false);
+      console.error("reCaptcha validation failed:", error);
+    }
+  }
+
+  console.log(reCaptchaValid);
 
   // * onSubmit
   async function sendEmail(event) {
@@ -88,29 +127,29 @@ export default function Contact({ closeMessenger }) {
   const containerStyles = `flex flex-col items-center w-full text-[1rem] md:text-lg lg-portrait:text-2xl`;
   const requiredStyles = ` after:text-colorPreset6 after:content-["*"]`;
 
-  // * disables button when input invalid
+  // * disables button when input or reCaptcha invalid
   const disableButton =
     !formData.email ||
     !formData.message ||
     formData.message.trim() === "" ||
-    !reCaptcha;
+    !reCaptchaValid;
 
   return (
     <dialog
-      tabIndex={0}
+      open
       ref={dialogRef}
       onKeyDown={(event) => {
         if (event.key === "Escape") {
           closeMessenger();
         }
       }}
-      className={`relative inset-0 -z-10 flex h-dvh items-center justify-center overflow-visible bg-gray-700 bg-opacity-90 backdrop:bg-gray-700 backdrop:bg-opacity-90`}
+      className={`fixed inset-0 flex h-dvh items-center justify-center overflow-visible bg-gray-700 bg-opacity-90`}
     >
       <motion.div
         initial={{ scale: 0, opacity: 0, y: 200 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className={`relative size-full max-h-[700px] max-w-[1000px] overflow-x-hidden overflow-y-scroll rounded-xl bg-colorPreset2 text-colorPreset1 lg-portrait:max-h-[800px]`}
+        className={`relative size-[90%] max-h-[700px] max-w-[1000px] overflow-x-hidden overflow-y-scroll rounded-xl bg-colorPreset2 text-colorPreset1 lg-portrait:max-h-[800px]`}
       >
         <IoMdCloseCircle
           onKeyDown={(event) => {
@@ -226,11 +265,12 @@ export default function Contact({ closeMessenger }) {
           </motion.button>
           {showReCaptcha && (
             <ReCAPTCHA
-              onChange={(event) => setReCaptcha(event)}
-              sitekey="6LfRE1sqAAAAAAQwwPFFfOjmzD3pR8JjPXttLSCj"
-              className={`md:scale-125`}
+              onChange={(event) => onRecaptchaChange(event)}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}
+              className={`z-10 md:scale-125`}
             />
           )}
+          <div tabIndex={0} className={`absolute`}></div>
         </form>
       </motion.div>
     </dialog>

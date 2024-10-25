@@ -25,6 +25,17 @@ button:active {
   transform: scale(0.9);
 }
 
+dialog {
+  z-index: 1000 !important;
+}
+
+.grecaptcha-badge,
+.g-recaptcha-badge,
+.grecaptcha-bubble-arrow,
+.grecaptcha-bubble-anchor {
+  z-index: 100000 !important;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
