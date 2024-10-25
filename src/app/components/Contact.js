@@ -85,8 +85,6 @@ export default function Contact({ closeMessenger }) {
     }
   }
 
-  console.log(reCaptchaValid);
-
   // * onSubmit
   async function sendEmail(event) {
     event.preventDefault();
@@ -141,7 +139,7 @@ export default function Contact({ closeMessenger }) {
           closeMessenger();
         }
       }}
-      className={`fixed inset-0 flex h-dvh items-center justify-center overflow-visible bg-gray-700 bg-opacity-90`}
+      className={`fixed inset-0 z-20 flex h-dvh w-screen items-center justify-center overflow-visible bg-gray-700 bg-opacity-90`}
     >
       <motion.div
         initial={{ scale: 0, opacity: 0, y: 200 }}
