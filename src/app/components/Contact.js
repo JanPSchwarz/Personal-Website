@@ -78,8 +78,7 @@ export default function Contact({ closeMessenger }) {
       const response = await axios.post("/api/contact/verifyReCaptcha", {
         token: value,
       });
-      console.log(response);
-      if (response.statusText === "OK") setReCaptchaValid(true);
+      if (response.status === 200) setReCaptchaValid(true);
     } catch (error) {
       setReCaptchaValid(false);
       console.error("reCaptcha validation failed:", error);
