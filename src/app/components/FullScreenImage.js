@@ -64,7 +64,7 @@ export default function FullScreenImage({
           )}
         >
           <div
-            className={`absolute left-0 z-10 h-full w-1/2`}
+            className={`absolute left-0 z-10 h-full w-1/2 cursor-pointer`}
             onClick={() => {
               arrowClick("previous");
               setImageHasLoaded(false);
@@ -86,7 +86,7 @@ export default function FullScreenImage({
             }}
           />
           <div
-            className={`absolute right-0 h-full w-1/2`}
+            className={`absolute right-0 h-full w-1/2 cursor-pointer`}
             onClick={() => {
               arrowClick("next");
               setImageHasLoaded(false);

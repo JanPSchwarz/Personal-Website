@@ -8,6 +8,7 @@ import CookieBanner from "./CookieBanner";
 import Contact from "./Contact";
 import coverPic from "/public/assets/Cover-pic-Jan.webp";
 import getPlaceholder from "../../../utils/getPlaceholder.js";
+import Typewriter from "./Typewriter";
 
 export default forwardRef(function Hero(props, ref) {
   const [showMessenger, setShowMessenger] = useState(false);
@@ -43,6 +44,9 @@ export default forwardRef(function Hero(props, ref) {
     }
   }, [pageLoaded]);
 
+  //* for delay of typewriter animations
+  const typewriterDelay = 1;
+
   return (
     <>
       {showBanner && (
@@ -64,11 +68,25 @@ export default forwardRef(function Hero(props, ref) {
         ref={(el) => (ref.current[0] = el)}
         className={`mx-auto flex h-full w-[80%] max-w-[1200px] snap-start flex-col items-center justify-evenly pt-[50px] text-xl md:justify-around md:pt-[70px] md:text-3xl lg:gap-10 landscape:relative landscape:items-start landscape:justify-center landscape:gap-7`}
       >
-        <p className={`w-full text-left`}>
-          Hi, ich bin <span className={`text-colorPreset5`}>Jan,</span>
-        </p>
-        <div
-          className={`relative left-[8%] aspect-square w-full overflow-visible md:w-[80%] landscape:absolute landscape:left-[55%] landscape:w-[60%]`}
+        <div className={`w-full text-left`}>
+          <Typewriter
+            text="Hi, ich bin"
+            delay={typewriterDelay}
+            tag="p"
+            className={`inline`}
+          />
+          <Typewriter
+            text=" Jan,"
+            tag="span"
+            delay={typewriterDelay + 1}
+            className={`text-colorPreset5`}
+          />
+        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className={`relative left-[8%] aspect-square w-full overflow-visible landscape:absolute landscape:left-[55%] landscape:w-[60%]`}
         >
           <Image
             src={coverPic}
@@ -125,18 +143,32 @@ export default forwardRef(function Hero(props, ref) {
               </a>
             </div>
           </div>
-        </div>
-        <h1
+        </motion.div>
+        <div
           className={`text-center text-5xl font-extrabold text-colorPreset3 md:text-7xl`}
         >
-          Front-End <span className={`block`}>Developer</span>
-        </h1>
-        <button
+          <Typewriter
+            tag="h1"
+            text="Front-End"
+            delay={typewriterDelay + 2}
+            className={""}
+          />
+          <Typewriter
+            tag="span"
+            text="Developer"
+            delay={typewriterDelay + 3}
+            className={"block"}
+          />
+        </div>
+        <motion.button
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: typewriterDelay + 4, duration: 1 }}
           className={`rounded-lg bg-colorPreset5 p-2 px-4 font-extrabold text-colorPreset6 saturate-[0.9] hover:scale-110 lg:mt-24 lg:text-4xl lg-portrait:p-4 lg-portrait:text-4xl`}
           onClick={() => setShowMessenger(true)}
         >
           Contact Me
-        </button>
+        </motion.button>
       </div>
     </>
   );

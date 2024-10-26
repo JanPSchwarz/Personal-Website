@@ -6,8 +6,8 @@ export default function CookieBanner({ buttonFunction }) {
     <motion.div
       initial={{ y: "100%", translateX: "-50%" }}
       animate={{ y: 0, translateX: "-50%" }}
-      transition={{ delay: 0.3, duration: 0.4 }}
-      className={`border-colorPreset5 fixed bottom-0 left-1/2 z-20 flex w-[calc(100vw-10%)] max-w-[500px] flex-col gap-2 rounded-md border-2 bg-colorPreset1 bg-opacity-60 p-4 backdrop-blur-sm`}
+      transition={{ delay: 7, duration: 0.4 }}
+      className={`fixed bottom-0 left-1/2 z-20 flex w-[calc(100vw-10%)] max-w-[500px] flex-col gap-2 rounded-md border-2 border-colorPreset5 bg-colorPreset1 bg-opacity-60 p-4 backdrop-blur-sm`}
     >
       <div
         className={`flex items-center justify-center gap-2 rounded-md bg-colorPreset2 text-black`}
@@ -20,7 +20,7 @@ export default function CookieBanner({ buttonFunction }) {
           Diese Seite nutzt nur technisch notwendige Cookies!
         </p>
         <button
-          className={`bg-colorPreset6 self-end rounded-md p-3`}
+          className={`self-end rounded-md bg-colorPreset6 p-3`}
           onClick={() => buttonFunction()}
         >
           Verstanden
