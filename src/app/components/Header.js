@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { MdSunny } from "react-icons/md";
 import { FaMoon } from "react-icons/fa";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function Header({ sectionRefs }) {
   const [isActive, setIsActive] = useState();
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  const [theme, setTheme] = useLocalStorageState("theme", {
+    defaultValue: "dark",
+  });
 
   useEffect(() => {
     const rootElement = document.documentElement;
@@ -14,8 +17,6 @@ export default function Header({ sectionRefs }) {
     } else {
       rootElement.classList.remove("light-mode");
     }
-
-    localStorage.setItem("theme", theme);
   }, [theme]);
 
   useEffect(() => {
