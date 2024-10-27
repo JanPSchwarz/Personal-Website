@@ -137,7 +137,7 @@ export default forwardRef(function Projects(props, ref) {
                   })}
                 </div>
                 <div
-                  className={`z-10 flex w-full items-center justify-between bg-colorPreset1`}
+                  className={`z-10 flex w-full items-center justify-between`}
                 >
                   <div
                     className={`flex w-full items-center justify-start md:gap-4 lg:justify-center lg:gap-16`}
