@@ -97,6 +97,13 @@ export default function Header({ sectionRefs }) {
       </nav>
       {theme === "dark" ? (
         <MdSunny
+          tabIndex={0}
+          aria-label="set light mode"
+          onKeyDown={(event) => {
+            if (event.code === "Enter") {
+              handleTheme("light");
+            }
+          }}
           onClick={() => {
             handleTheme("light");
           }}
@@ -104,6 +111,13 @@ export default function Header({ sectionRefs }) {
         />
       ) : (
         <FaMoon
+          tabIndex={0}
+          aria-label="set dark mode"
+          onKeyDown={(event) => {
+            if (event.code === "Enter") {
+              handleTheme("dark");
+            }
+          }}
           className={themeIconStyles}
           onClick={() => {
             handleTheme("dark");
