@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* normal colors treated as dark-mode */
 :root {
   --colorPreset1: 55, 52, 52;
   --colorPreset2: 255, 255, 255;
@@ -9,6 +10,15 @@
   --colorPreset4: 217, 217, 217;
   --colorPreset5: 65, 190, 160;
   --colorPreset6: 199, 56, 90;
+}
+
+.light-mode {
+  --colorPreset1: 238, 238, 238;
+  --colorPreset2: 30, 30, 30;
+  --colorPreset3: 0, 69, 96;
+  --colorPreset4: 72, 72, 72;
+  --colorPreset5: 193, 138, 0;
+  --colorPreset6: 0, 69, 96;
 }
 
 html {

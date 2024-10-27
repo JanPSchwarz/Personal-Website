@@ -10,17 +10,17 @@ export default function CookieBanner({ buttonFunction }) {
       className={`fixed bottom-0 left-1/2 z-20 flex w-[calc(100vw-10%)] max-w-[500px] flex-col gap-2 rounded-md border-2 border-colorPreset5 bg-colorPreset1 bg-opacity-60 p-4 backdrop-blur-sm`}
     >
       <div
-        className={`flex items-center justify-center gap-2 rounded-md bg-colorPreset2 text-black`}
+        className={`flex items-center justify-center gap-2 rounded-md bg-colorPreset2 text-colorPreset1`}
       >
         <h2>Cookies</h2>
         <RxCookie />
       </div>
       <div className={`flex justify-between gap-4 text-sm`}>
-        <p className={`rounded-md bg-colorPreset2 p-1 text-black`}>
+        <p className={`rounded-md bg-colorPreset2 p-1 text-colorPreset1`}>
           Diese Seite nutzt nur technisch notwendige Cookies!
         </p>
         <button
-          className={`self-end rounded-md bg-colorPreset6 p-3`}
+          className={`self-end rounded-md bg-colorPreset5 p-3 text-colorPreset1`}
           onClick={() => buttonFunction()}
         >
           Verstanden

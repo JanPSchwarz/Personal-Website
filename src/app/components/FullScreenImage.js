@@ -39,11 +39,11 @@ export default function FullScreenImage({
           close();
         }
       }}
-      className={`fixed inset-0 z-20 flex h-dvh w-screen flex-col items-center justify-center bg-gray-700 bg-opacity-90 backdrop:bg-gray-700 backdrop:bg-opacity-90`}
+      className={`fixed inset-0 z-20 flex h-dvh w-screen flex-col items-center justify-center bg-transparent bg-opacity-90 backdrop:bg-gray-700 backdrop:bg-opacity-90`}
     >
       <div
         onClick={(event) => event.stopPropagation()}
-        className={`relative flex size-[90%] select-none flex-col items-center justify-center gap-6 rounded-xl bg-colorPreset4 p-4`}
+        className={`relative flex size-[90%] select-none flex-col items-center justify-center gap-6 rounded-xl bg-slate-200 p-4`}
       >
         <AiOutlineFullscreenExit
           tabIndex={0}

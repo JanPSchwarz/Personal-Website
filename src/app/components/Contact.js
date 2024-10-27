@@ -121,7 +121,7 @@ export default function Contact({ closeMessenger }) {
   const inputFieldStyles = `border-2 border-gray-300 rounded w-full bg-slate-200`;
   const labelStyles = `w-full`;
   const containerStyles = `flex flex-col items-center w-full text-[1rem] md:text-lg lg-portrait:text-2xl`;
-  const requiredStyles = ` after:text-colorPreset6 after:content-["*"]`;
+  const requiredStyles = ` after:text-red-600 after:content-["*"]`;
 
   // * disables button when input or reCaptcha invalid
   const disableButton =
@@ -145,7 +145,7 @@ export default function Contact({ closeMessenger }) {
         initial={{ scale: 0, opacity: 0, y: 200 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className={`relative size-[90%] max-h-[700px] max-w-[1000px] overflow-x-hidden overflow-y-scroll rounded-xl bg-colorPreset2 text-colorPreset1 lg-portrait:max-h-[800px]`}
+        className={`relative size-[90%] max-h-[700px] max-w-[1000px] overflow-x-hidden overflow-y-scroll rounded-xl bg-colorPreset1 text-colorPreset2 lg-portrait:max-h-[800px]`}
       >
         <IoMdCloseCircle
           onKeyDown={(event) => {
