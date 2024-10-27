@@ -64,6 +64,8 @@ export default function Header({ sectionRefs }) {
     setTheme((prevTheme) => (prevTheme === prop ? prevTheme : prop));
   }
 
+  const themeIconStyles = `relative -right-[15%] cursor-pointer hover:scale-110 hover:fill-colorPreset5`;
+
   return (
     <header
       className={`fixed top-0 z-10 flex w-full items-center justify-center py-3 backdrop-blur-lg backdrop-opacity-80 md:text-2xl lg-portrait:text-3xl`}
@@ -98,11 +100,11 @@ export default function Header({ sectionRefs }) {
           onClick={() => {
             handleTheme("light");
           }}
-          className={`relative -right-[15%]`}
+          className={themeIconStyles}
         />
       ) : (
         <FaMoon
-          className={`relative -right-[15%]`}
+          className={themeIconStyles}
           onClick={() => {
             handleTheme("dark");
           }}

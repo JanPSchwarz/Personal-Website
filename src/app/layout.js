@@ -28,7 +28,9 @@ export default function RootLayout({ children }) {
       lang="de-DE"
       className={`${poppins.variable} ${spaceGrotesk.variable}`}
     >
-      <body className={`bg-colorPreset1 font-poppins text-colorPreset2`}>
+      <body
+        className={`bg-colorPreset1 font-poppins text-colorPreset2 transition-colors duration-1000`}
+      >
         {children}
         <SpeedInsights />
         <Analytics />

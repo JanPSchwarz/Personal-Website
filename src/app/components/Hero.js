@@ -151,13 +151,13 @@ export default forwardRef(function Hero(props, ref) {
             tag="h1"
             text="Front-End"
             delay={typewriterDelay + 2}
-            className={""}
+            className={``}
           />
           <Typewriter
             tag="span"
             text="Developer"
             delay={typewriterDelay + 3}
-            className={"block"}
+            className={`block`}
           />
         </div>
         <motion.button
