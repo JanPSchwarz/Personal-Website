@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { MdSunny } from "react-icons/md";
 import { FaMoon } from "react-icons/fa";
 import useLocalStorageState from "use-local-storage-state";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Header({ sectionRefs }) {
   const [isActive, setIsActive] = useState();
@@ -64,7 +65,15 @@ export default function Header({ sectionRefs }) {
     setTheme((prevTheme) => (prevTheme === prop ? prevTheme : prop));
   }
 
-  const themeIconStyles = `relative -right-[15%] cursor-pointer hover:scale-110 hover:fill-colorPreset5`;
+  const themeIconStyles = `cursor-pointer focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 hover:scale-110 hover:fill-colorPreset5`;
+
+  const sharedTransition = { transition: { duration: 0.5, ease: "linear" } };
+
+  const variants = {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0, ...sharedTransition },
+    exit: { opacity: 0, y: 10, ...sharedTransition },
+  };
 
   return (
     <header
@@ -95,35 +104,55 @@ export default function Header({ sectionRefs }) {
           );
         })}
       </nav>
-      {theme === "dark" ? (
-        <MdSunny
-          tabIndex={0}
-          aria-label="set light mode"
-          onKeyDown={(event) => {
-            if (event.code === "Enter") {
-              handleTheme("light");
-            }
-          }}
-          onClick={() => {
-            handleTheme("light");
-          }}
-          className={themeIconStyles}
-        />
-      ) : (
-        <FaMoon
-          tabIndex={0}
-          aria-label="set dark mode"
-          onKeyDown={(event) => {
-            if (event.code === "Enter") {
-              handleTheme("dark");
-            }
-          }}
-          className={themeIconStyles}
-          onClick={() => {
-            handleTheme("dark");
-          }}
-        />
-      )}
+      <AnimatePresence initial={false} mode="wait">
+        {theme === "dark" ? (
+          <motion.div
+            key={"darkMode"}
+            variants={variants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className={`relative -right-[15%]`}
+          >
+            <MdSunny
+              tabIndex={0}
+              aria-label="set light mode"
+              onKeyDown={(event) => {
+                if (event.code === "Enter") {
+                  handleTheme("light");
+                }
+              }}
+              onClick={() => {
+                handleTheme("light");
+              }}
+              className={themeIconStyles}
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            key={"lightMode"}
+            variants={variants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className={`relative -right-[15%]`}
+          >
+            <FaMoon
+              tabIndex={0}
+              aria-label="set dark mode"
+              onKeyDown={(event) => {
+                if (event.code === "Enter") {
+                  handleTheme("dark");
+                }
+              }}
+              className={themeIconStyles}
+              onClick={() => {
+                handleTheme("dark");
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div
         className={`absolute bottom-0 h-[1px] w-[80%] bg-colorPreset3 transition-all duration-500`}
       />

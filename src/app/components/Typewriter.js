@@ -41,7 +41,7 @@ export default function Typewriter({ tag, text, className, delay }) {
         animate={controls}
       >
         {text.split("").map((char, index) => (
-          <motion.span key={index} variants={letterVariants}>
+          <motion.span className={``} key={index} variants={letterVariants}>
             {char}
           </motion.span>
         ))}
