@@ -17,7 +17,7 @@ export default forwardRef(function Hero(props, ref) {
   const [imageLoaded, setImageHasLoaded] = useState(false);
 
   const [pageLoaded, setPageHasLoaded] = useState(false);
-  const [showBanner, setShowBanner] = useState(true);
+  const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
@@ -37,6 +37,8 @@ export default forwardRef(function Hero(props, ref) {
 
   useEffect(() => {
     const banner = sessionStorage.getItem("banner");
+
+    console.log(!banner);
 
     if (!banner) {
       setShowBanner(true);
