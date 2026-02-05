@@ -18,8 +18,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata = {
   title: "Jans's Website",
-  description:
-    "Welcome to my personal Website. Have a look around and get to know me!",
+  description: "Welcome to my personal Website! Have a look around.",
 };
 
 export default function RootLayout({ children }) {

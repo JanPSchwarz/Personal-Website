@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import SpinnerSVG from "../../../public/assets/spinner.svg";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
@@ -118,7 +118,7 @@ export default function Contact({ closeMessenger }) {
   }
 
   // * shared styled from Form-Elements
-  const inputFieldStyles = `border-2 border-gray-300 rounded w-full bg-slate-200`;
+  const inputFieldStyles = `border-2 border-gray-300 rounded text-colorPreset2 w-full bg-slate-200/20 pl-1`;
   const labelStyles = `w-full`;
   const containerStyles = `flex flex-col items-center w-full text-[1rem] md:text-lg lg-portrait:text-2xl`;
   const requiredStyles = ` after:text-red-600 after:content-["*"]`;

@@ -1,6 +1,6 @@
-"use server";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import placeholderGenerator from "./placeholderGenerator.mjs";
 
 async function getAllImages(dir) {
@@ -19,23 +19,35 @@ async function getAllImages(dir) {
 }
 
 async function main() {
-  const imagesDir = path.join(process.cwd(), `public`);
+  const currentDirectory = fileURLToPath(import.meta.url);
+  const projectRoot = path.join(currentDirectory, "..", "..");
+  const imagesDir = path.join(projectRoot, `public`);
+  console.log(`\nScanning images in: ${imagesDir}`);
   const blurHashData = [];
 
   try {
     const imageFiles = await getAllImages(imagesDir);
+    console.log(
+      `\nFound ${imageFiles.length} image(s). Generating blurhash data...\n`,
+    );
+    let count = 0;
 
     for (const filePath of imageFiles) {
       const thumbhash = await placeholderGenerator(filePath);
-      const relativePath = path.relative(imagesDir, filePath);
       blurHashData.push({ name: path.basename(filePath), blurHash: thumbhash });
+      count += 1;
+      process.stdout.write(
+        `\rGenerated ${count}/${imageFiles.length} blurhashes...`,
+      );
     }
+    console.log(
+      `\nAll blurhashes generated. Writing to placeholderData.json...`,
+    );
     await fs.writeFile(
-      path.join(process.cwd(), `lib`, `placeholderData.json`),
+      path.join(projectRoot, `lib`, `placeholderData.json`),
       JSON.stringify(blurHashData, null, 2),
     );
-
-    console.log("blurhashData generated");
+    console.log("\nblurhashData generated successfully 🎉\n");
   } catch (error) {
     console.error("Failed:", error);
   }

@@ -7,7 +7,6 @@ import CVbutton from "@/app/components/CVbutton";
 import CookieBanner from "./CookieBanner";
 import Contact from "./Contact";
 import coverPic from "/public/assets/Cover-pic-Jan.webp";
-import getPlaceholder from "../../../utils/getPlaceholder.js";
 import Typewriter from "./Typewriter";
 
 export default forwardRef(function Hero(props, ref) {
@@ -38,8 +37,6 @@ export default forwardRef(function Hero(props, ref) {
   useEffect(() => {
     const banner = sessionStorage.getItem("banner");
 
-    console.log(!banner);
-
     if (!banner) {
       setShowBanner(true);
       sessionStorage.setItem("banner", "true");
@@ -47,7 +44,7 @@ export default forwardRef(function Hero(props, ref) {
   }, [pageLoaded]);
 
   //* for delay of typewriter animations
-  const typewriterDelay = 1;
+  const typewriterDelay = 0.8;
 
   return (
     <>
@@ -68,7 +65,7 @@ export default forwardRef(function Hero(props, ref) {
       <div
         id="home"
         ref={(el) => (ref.current[0] = el)}
-        className={`mx-auto flex h-full w-[80%] max-w-[1200px] snap-start flex-col items-center justify-evenly pt-[50px] text-xl md:justify-around md:pt-[70px] md:text-3xl lg:gap-10 landscape:relative landscape:items-start landscape:justify-center landscape:gap-7`}
+        className={`mx-auto flex h-full w-[85%] max-w-[1200px] snap-start flex-col items-center justify-evenly pt-[50px] text-xl md:justify-around md:pt-[70px] md:text-3xl lg:gap-10 landscape:relative landscape:items-start landscape:justify-center landscape:gap-7`}
       >
         <div className={`w-full text-left`}>
           <Typewriter
@@ -92,7 +89,6 @@ export default forwardRef(function Hero(props, ref) {
         >
           <Image
             src={coverPic}
-            placeholder={getPlaceholder(`Cover-pic-Jan.webp`)}
             fill
             onLoad={() => setImageHasLoaded(true)}
             alt="Bild von Jan"
@@ -108,7 +104,7 @@ export default forwardRef(function Hero(props, ref) {
               className={`absolute bottom-[5%] right-[285%] flex w-[35px] flex-col gap-4 overflow-visible md:w-auto md:gap-6 lg:gap-10`}
             >
               <div
-                className={`flex aspect-square size-10 rotate-[10deg] cursor-pointer items-center justify-center overflow-visible rounded-full bg-colorPreset6 hover:scale-[110%] hover:bg-colorPreset2 active:scale-90 active:bg-colorPreset2 md:size-16`}
+                className={`flex aspect-square size-10 rotate-[10deg] cursor-pointer items-center justify-center overflow-visible rounded-full bg-colorPreset4 hover:scale-[110%] hover:bg-colorPreset2 active:scale-90 active:bg-colorPreset2 md:size-16`}
               >
                 <BiSolidEnvelope
                   tabIndex={0}
@@ -130,7 +126,7 @@ export default forwardRef(function Hero(props, ref) {
               <a
                 href="//www.linkedin.com/in/jan-schwarz-webdeveloper"
                 target="_blank"
-                className={`flex aspect-square size-10 rotate-[10deg] cursor-pointer items-center justify-center rounded-full bg-colorPreset6 hover:scale-[110%] hover:bg-colorPreset2 active:scale-90 active:bg-colorPreset2 md:size-16`}
+                className={`flex aspect-square size-10 rotate-[10deg] cursor-pointer items-center justify-center rounded-full bg-colorPreset4 hover:scale-[110%] hover:bg-colorPreset2 active:scale-90 active:bg-colorPreset2 md:size-16`}
               >
                 <FaLinkedinIn
                   aria-label="Link to Jan's LinkedIn profile"
@@ -140,7 +136,7 @@ export default forwardRef(function Hero(props, ref) {
               <a href="//github.com/JanPSchwarz" target="_blank">
                 <FaGithub
                   aria-label="Link to Jan's GitHub profile"
-                  className={`size-10 rotate-[10deg] cursor-pointer fill-colorPreset6 hover:scale-[110%] hover:fill-colorPreset2 active:scale-90 active:fill-colorPreset2 md:size-16`}
+                  className={`size-10 rotate-[10deg] cursor-pointer fill-colorPreset4 hover:scale-[110%] hover:fill-colorPreset2 active:scale-90 active:fill-colorPreset2 md:size-16`}
                 />
               </a>
             </div>

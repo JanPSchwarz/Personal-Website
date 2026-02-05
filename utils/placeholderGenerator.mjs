@@ -1,4 +1,3 @@
-"use server";
 import sharp from "sharp";
 
 export default async function generateThumbhash(imagePath) {

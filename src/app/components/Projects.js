@@ -1,14 +1,14 @@
-import { forwardRef, useEffect } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import Image from "next/image";
-import { useState } from "react";
 import { projectsData } from "../../../lib/projectsData";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import FullScreenImage from "./FullScreenImage";
 import { useSwipeable } from "react-swipeable";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaGlobe } from "react-icons/fa";
 import { AiOutlineFullscreen } from "react-icons/ai";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { MdTouchApp } from "react-icons/md";
+
 import { twMerge } from "tailwind-merge";
 
 export default forwardRef(function Projects(props, ref) {
@@ -186,21 +186,26 @@ export default forwardRef(function Projects(props, ref) {
                       </motion.div>
                     </div>
                   </div>
-                  <div className={`flex gap-2`}>
-                    <a href={github} target="_blank">
-                      <FaGithub
-                        className={`size-8 flex-1 cursor-pointer fill-colorPreset5 hover:scale-110 hover:fill-colorPreset2 active:scale-90 md:size-12`}
-                      />
-                    </a>
-                    <a
-                      className={`flex aspect-square flex-1 items-center justify-center rounded-full bg-colorPreset5 p-1 text-sm text-colorPreset1 hover:scale-110 hover:bg-colorPreset2 active:scale-90 md:w-12 md:text-xl md:font-semibold`}
-                      href={url}
-                      target="_blank"
-                    >
-                      URL
-                    </a>
+                  <div
+                    className={`flex gap-2 rounded-md border-b border-l border-colorPreset5 bg-colorPreset3/10 p-2`}
+                  >
+                    {github && (
+                      <a href={github} target="_blank" aria-label="github link">
+                        <FaGithub
+                          className={`size-5 flex-1 cursor-pointer rounded-full fill-colorPreset5 hover:scale-110 hover:fill-colorPreset2 active:scale-90 md:size-8`}
+                        />
+                      </a>
+                    )}
+                    {url && (
+                      <a href={url} target="_blank" aria-label={"website link"}>
+                        <FaGlobe
+                          className={`size-5 flex-1 cursor-pointer rounded-full fill-colorPreset5 hover:scale-105 hover:fill-colorPreset2 active:scale-100 md:size-8`}
+                        />
+                      </a>
+                    )}
                   </div>
                 </div>
+                <div className={"mx-auto h-[0.5px] w-10/12 bg-colorPreset3"} />
               </div>
             </div>
             <div
@@ -211,7 +216,7 @@ export default forwardRef(function Projects(props, ref) {
                 animate={animate}
                 transition={transition}
                 exit={exit}
-                className={`relative flex h-full w-full max-w-[650px] flex-col items-center justify-center landscape:flex-1`}
+                className={`relative flex h-full w-full max-w-[650px] flex-col items-center justify-center rounded-md bg-colorPreset3/10 p-4 landscape:flex-1`}
               >
                 <AnimatePresence initial={false} mode="popLayout">
                   <div
@@ -240,7 +245,7 @@ export default forwardRef(function Projects(props, ref) {
                       }}
                     >
                       <IoIosArrowBack
-                        className={`absolute top-1/2 size-[12%] group-hover:scale-125 group-active:scale-90`}
+                        className={`absolute top-1/2 size-[12%] fill-colorPreset5 group-hover:scale-125 group-active:scale-90`}
                       />
                     </div>
                     <Image
@@ -276,7 +281,7 @@ export default forwardRef(function Projects(props, ref) {
                       }}
                     >
                       <IoIosArrowBack
-                        className={`absolute right-0 top-1/2 size-[12%] rotate-180 transition transition-none group-hover:scale-125 group-active:scale-90`}
+                        className={`absolute right-0 top-1/2 size-[12%] rotate-180 fill-colorPreset5 transition transition-none group-hover:scale-125 group-active:scale-90`}
                       />
                     </div>
                   </div>
@@ -305,29 +310,33 @@ export default forwardRef(function Projects(props, ref) {
                 </div>
               </motion.figure>
               <div
-                className={`flex flex-col gap-2 md:gap-8 landscape:h-full landscape:flex-1 landscape:justify-around`}
+                className={`flex max-w-full flex-col gap-2 md:gap-8 landscape:h-full landscape:flex-1 landscape:justify-between`}
               >
-                <div className={`flex w-full flex-col`}>
+                <div
+                  className={`flex h-[150px] w-full flex-col overflow-x-hidden overflow-y-scroll md:h-[200px] lg:h-[600px]`}
+                >
                   <motion.p
                     initial={inital}
                     animate={animate}
                     transition={transition}
                     exit={exit}
-                    className={`text-pretty text-[clamp(0.85rem,_2.5vw,_1.7rem)] font-light leading-[clamp(1.5rem,_3.5vh,_3rem)] text-colorPreset2 landscape:text-[clamp(0.85rem,_2.5vh,_1.3rem)] landscape:leading-[clamp(1.5rem,_3.5vw,_3rem)] [&_a]:text-colorPreset5 [&_a]:underline [&_a]:underline-offset-4`}
+                    className={`text-pretty text-sm font-light leading-loose text-colorPreset2 md:text-base md:leading-loose lg:text-lg lg:leading-loose [&_a]:text-colorPreset5 [&_a]:underline [&_a]:underline-offset-4`}
                   >
                     {description}
                   </motion.p>
                 </div>
-                <div className={`flex w-full flex-col gap-3`}>
-                  <p className={`text-sm text-colorPreset3 md:text-xl`}>
+                <motion.div
+                  initial={inital}
+                  animate={animate}
+                  transition={transition}
+                  exit={exit}
+                  className={`flex w-full flex-col gap-3 rounded-md border-b border-l border-colorPreset5 bg-colorPreset3/10 p-1 md:p-2`}
+                >
+                  <p className={`text-xs text-colorPreset3 md:text-lg`}>
                     Verwendete Technologien
                   </p>
-                  <motion.div
-                    initial={inital}
-                    animate={animate}
-                    transition={transition}
-                    exit={exit}
-                    className={`flex w-full justify-around gap-2 overflow-x-scroll landscape:justify-between`}
+                  <div
+                    className={`flex w-full justify-around gap-4 overflow-x-scroll landscape:justify-between`}
                   >
                     {techStack.map(({ icon: Icon, text, link }, index) => {
                       return (
@@ -338,18 +347,18 @@ export default forwardRef(function Projects(props, ref) {
                           className={`flex flex-1 flex-col items-center justify-center text-nowrap`}
                         >
                           <Icon
-                            className={`size-[clamp(0.8rem,_8vw,_3.5rem)] fill-colorPreset2 hover:fill-colorPreset5 active:scale-90 landscape:size-[clamp(0.8rem,_10vh,_2.8rem)]`}
+                            className={`size-[clamp(0.8rem,_6vw,_2.5rem)] fill-colorPreset2 hover:fill-colorPreset5 active:scale-90 landscape:size-[clamp(0.8rem,_10vh,_2.8rem)]`}
                           />
                           <p
-                            className={`text-[clamp(0.8rem,_2.3vw,_1.2rem)] font-extralight landscape:text-[clamp(0.7rem,_2.1vh,_1.2rem)]`}
+                            className={`text-[clamp(0.8rem,_1.8vw,_1.2rem)] font-extralight landscape:text-[clamp(0.7rem,_2.1vh,_1.2rem)]`}
                           >
                             {text}
                           </p>
                         </a>
                       );
                     })}
-                  </motion.div>
-                </div>
+                  </div>
+                </motion.div>
               </div>
             </div>
           </motion.div>

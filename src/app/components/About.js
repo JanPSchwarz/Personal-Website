@@ -1,12 +1,12 @@
 import CVbutton from "./CVbutton";
-import { forwardRef, useEffect, useState } from "react";
-import { SiMongodb } from "react-icons/si";
+import { forwardRef,useEffect,useState } from "react";
+import { SiAxios,SiMongodb,SiShadcnui,SiStyledcomponents,SiTypescript } from "react-icons/si";
 import { AiOutlineJavaScript } from "react-icons/ai";
 import { TbBrandNextjs } from "react-icons/tb";
-import { FaReact, FaHtml5, FaCss3Alt } from "react-icons/fa6";
-import { SiStyledcomponents } from "react-icons/si";
+import { FaCss3Alt,FaHtml5,FaReact } from "react-icons/fa6";
 import { RiTailwindCssFill } from "react-icons/ri";
-import { FaNode } from "react-icons/fa";
+import { FaDocker,FaJava,FaNode } from "react-icons/fa";
+import { BiLogoSpringBoot } from "react-icons/bi";
 
 export default forwardRef(function About(prop, ref) {
   const [isMobile, setIsMobile] = useState(true);
@@ -24,74 +24,94 @@ export default forwardRef(function About(prop, ref) {
     return () => window.removeEventListener(`resize`, detectMobile);
   }, []);
 
-  const icons = [
-    TbBrandNextjs,
-    AiOutlineJavaScript,
-    FaReact,
-    SiMongodb,
-    FaNode,
-    FaHtml5,
-    FaCss3Alt,
-    SiStyledcomponents,
-    RiTailwindCssFill,
+  const iconsWithNames = [
+    { icon: FaJava, name: "Java" },
+    { icon: SiTypescript, name: "TypeScript" },
+    { icon: TbBrandNextjs, name: "Next.js" },
+    { icon: AiOutlineJavaScript, name: "JavaScript" },
+    { icon: FaReact, name: "React" },
+    { icon: SiMongodb, name: "MongoDB" },
+    { icon: FaNode, name: "Node.js" },
+    { icon: FaHtml5, name: "HTML5" },
+    { icon: FaCss3Alt, name: "CSS3" },
+    { icon: SiStyledcomponents, name: "Styled-Components" },
+    { icon: RiTailwindCssFill, name: "TailwindCSS" },
+    { icon: FaDocker, name: "Docker" },
+    { icon: SiShadcnui, name: "shadcn/ui" },
+    { icon: SiAxios, name: "Axios" },
+    { icon: BiLogoSpringBoot, name: "Spring Boot" },
   ];
 
   return (
-    <div
-      id="about"
-      ref={(el) => (ref.current[1] = el)}
-      className={`mx-auto flex h-full w-[80%] max-w-[1200px] snap-start flex-col items-center justify-start gap-4 overflow-scroll pt-[70px] md:pt-[80px]`}
-    >
-      <div className={`flex w-full items-center justify-between md:mt-6`}>
-        <h2 className={`text-3xl font-extrabold text-colorPreset3 md:text-5xl`}>
-          About
-        </h2>
-        <CVbutton className={`mx-1 size-10 bg-colorPreset5 md:size-16`} />
-      </div>
+    <>
       <div
-        className={`flex h-[90%] flex-col justify-evenly gap-4 text-pretty text-[clamp(0.75rem,_1.7vh,_2rem)] font-light leading-[clamp(1.5rem,_4vh,_4rem)] text-colorPreset2 md:mt-6 md:justify-start landscape:text-[clamp(0.8rem,_1.5vw,_1.2rem)] landscape:leading-[clamp(1.5rem,_4vw,_3rem)] [&_a]:text-colorPreset5 [&_a]:underline [&_a]:underline-offset-4 [&_strong]:text-colorPreset5`}
+        id="about"
+        ref={(el) => (ref.current[1] = el)}
+        className={`mx-auto flex h-full w-[85%] max-w-[1200px] snap-start flex-col items-center justify-between gap-8 overflow-scroll pb-4 pt-[70px] [scrollbar-width:_none] md:pb-8 md:pt-[80px]`}
       >
         <div>
-          Nach einem Karrierewechsel habe ich mich voll und ganz der
-          Web-Entwicklung verschrieben. Dabei liebe ich es,{" "}
-          <strong>Logik mit ansprechenden Designs</strong> zu kombinieren, um
-          Web-Apps zu bauen, die nicht nur funktional, sondern auch schön sind.
-        </div>
-        <div>
-          <p>
-            Im Juni 2024 habe ich meinen <strong>Web-Development-Kurs</strong>{" "}
-            bei der{" "}
-            <a href="//www.neuefische.de/" target="_blank">
-              NeueFische GmbH
-            </a>{" "}
-            abgeschlossen und bin jetzt auf der{" "}
-            <strong>Suche nach spannenden Projekten</strong> und
-            Herausforderungen.
-          </p>
-        </div>
-        <div>
-          <p>
-            Mein aktueller Tech-Stack umfasst{" "}
-            <strong>
-              HTML, CSS, TailwindCSS, Styled-Components, JavaScript, NodeJS,
-              mongoDB, React und Next.js
-            </strong>
-            . Doch damit nicht genug – ich lerne gerade fleißig TypeScript, um
-            mein Wissen weiter auszubauen.
-          </p>
-        </div>
-        {!isMobile && (
-          <div className={`flex h-full items-center justify-center`}>
-            <div
-              className={`flex w-full flex-wrap justify-center gap-6 lg:justify-around`}
+          <div
+            className={`mb-4 flex w-full items-center justify-between md:mt-6`}
+          >
+            <h2
+              className={`text-3xl font-extrabold text-colorPreset3 md:text-5xl`}
             >
-              {icons.map((Icon, index) => {
-                return <Icon key={index} className={`size-16`} />;
-              })}
-            </div>
+              About
+            </h2>
+            <CVbutton className={`mx-1 size-10 bg-colorPreset5 md:size-16`} />
           </div>
-        )}
+          <div
+            className={`flex h-[90%] flex-col justify-evenly gap-4 space-y-4 text-pretty text-sm font-light leading-loose text-colorPreset2 md:mt-6 md:justify-start lg:text-lg lg:leading-loose [&_a]:text-colorPreset5 [&_a]:underline [&_a]:underline-offset-4 [&_strong]:text-colorPreset5`}
+          >
+            <p>
+              Nach einem Karrierewechsel habe ich mich voll und ganz der
+              Web-Entwicklung verschrieben. Dabei gefällt mir,{" "}
+              <strong>Logik mit ansprechenden Designs</strong> zu kombinieren,
+              um Web-Apps zu bauen, die nicht nur funktional, sondern auch schön
+              sind.
+            </p>
+            <p>
+              Durch zwei Kurse im Bereich <strong>Front-End-</strong> (React,
+              NextJS) und <strong>Back-End-</strong> (Java, Spring Boot)
+              Development bei der{" "}
+              <a href="//www.neuefische.de/" target="_blank">
+                NeueFische GmbH
+              </a>{" "}
+              habe ich mich auf den neusten Stand der Technik gebracht und
+              praktische Erfahrungen gesammelt.
+            </p>
+            <p>
+              Dabei habe ich gelernt moderne Web-Apps umzusetzen, egal ob in
+              einem serverless set-up oder mit dedizierten API&#39;s in Spring
+              Boot oder NodeJS.
+            </p>
+            <p>
+              Eine Übersicht über meinen aktuellen Tech-Stack ist unter diesem
+              Text zu finden. Im nächsten Abschnitt ist außerdem eine Auswahl an
+              Projekten, die ich umgesetzt habe, zu sehen.
+            </p>
+          </div>
+        </div>
+        <div className={`flex w-full items-center justify-evenly`}>
+          <div
+            className={`flex w-full flex-wrap justify-center gap-6 lg:justify-around`}
+          >
+            {iconsWithNames.map(({ icon: Icon, name }) => {
+              return (
+                <div key={name} className={"space-y-2"}>
+                  <Icon
+                    key={name}
+                    className={`mx-auto size-8 md:size-12 lg:size-16`}
+                  />
+                  <p className={"text-center text-sm text-colorPreset3"}>
+                    {name}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 });

@@ -4,7 +4,7 @@ export default function CVbutton({ className }) {
   return (
     <div
       className={twMerge(
-        `bg-colorPreset6 flex aspect-square size-16 cursor-pointer items-center justify-center rounded-full hover:scale-[110%] hover:bg-colorPreset2 active:scale-90 active:bg-colorPreset2`,
+        `flex aspect-square size-16 cursor-pointer items-center justify-center rounded-full bg-colorPreset4 hover:scale-[110%] hover:bg-colorPreset2 active:scale-90 active:bg-colorPreset2`,
         className,
       )}
     >
