@@ -1,12 +1,12 @@
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef,useEffect,useState } from "react";
 import Image from "next/image";
 import { projectsData } from "../../../lib/projectsData";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence,motion } from "framer-motion";
 import FullScreenImage from "./FullScreenImage";
 import { useSwipeable } from "react-swipeable";
-import { FaGithub, FaGlobe } from "react-icons/fa";
+import { FaGithub,FaGlobe } from "react-icons/fa";
 import { AiOutlineFullscreen } from "react-icons/ai";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack,IoIosArrowForward } from "react-icons/io";
 import { MdTouchApp } from "react-icons/md";
 
 import { twMerge } from "tailwind-merge";
@@ -84,6 +84,17 @@ export default forwardRef(function Projects(props, ref) {
     },
     onSwipedRight: () => {
       switchProject("previous");
+    },
+    preventScrollOnSwipe: false,
+    trackMouse: true,
+  });
+
+  const techStackHandlers = useSwipeable({
+    onSwipedLeft: (e) => {
+      e.event.stopPropagation();
+    },
+    onSwipedRight: (e) => {
+      e.event.stopPropagation();
     },
     preventScrollOnSwipe: false,
     trackMouse: true,
@@ -337,6 +348,7 @@ export default forwardRef(function Projects(props, ref) {
                   </p>
                   <div
                     className={`flex w-full justify-around gap-4 overflow-x-scroll landscape:justify-between`}
+                    {...techStackHandlers}
                   >
                     {techStack.map(({ icon: Icon, text, link }, index) => {
                       return (
