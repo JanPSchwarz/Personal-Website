@@ -3,6 +3,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
 import { Poppins, Space_Grotesk } from "next/font/google";
+import Footer from "@/app/components/Footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
         className={`bg-colorPreset1 font-poppins text-colorPreset2 transition-colors duration-1000`}
       >
         {children}
+        <Footer />
         <SpeedInsights />
         <Analytics />
       </body>

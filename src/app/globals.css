@@ -4,39 +4,39 @@
 
 /* normal colors treated as dark-mode */
 :root {
-  --colorPreset1: 55, 52, 52;
-  --colorPreset2: 255, 255, 255;
-  --colorPreset3: 166, 187, 204;
-  --colorPreset4: 217, 217, 217;
-  --colorPreset5: 65, 190, 160;
-  --colorPreset6: 199, 56, 90;
+    --colorPreset1: 55, 52, 52;
+    --colorPreset2: 255, 255, 255;
+    --colorPreset3: 166, 187, 204;
+    --colorPreset4: 217, 217, 217;
+    --colorPreset5: 65, 190, 160;
+    --colorPreset6: 199, 56, 90;
 }
 
 .light-mode {
-  --colorPreset1: 238, 238, 238;
-  --colorPreset2: 30, 30, 30;
-  --colorPreset3: 0, 69, 96;
-  --colorPreset4: 72, 72, 72;
-  --colorPreset5: 193, 138, 0;
-  --colorPreset6: 0, 69, 96;
+    --colorPreset1: 238, 238, 238;
+    --colorPreset2: 30, 30, 30;
+    --colorPreset3: 0, 69, 96;
+    --colorPreset4: 72, 72, 72;
+    --colorPreset5: 193, 138, 0;
+    --colorPreset6: 0, 69, 96;
 }
 
 html {
-  scroll-behavior: smooth;
-  overflow-y: hidden;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
-  overflow-y: hidden;
-  scroll-behavior: smooth;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 button:active {
-  transform: scale(0.9);
+    transform: scale(0.9);
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+    .text-balance {
+        text-wrap: balance;
+    }
 }

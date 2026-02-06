@@ -1,13 +1,12 @@
-import { forwardRef,useEffect,useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { projectsData } from "../../../lib/projectsData";
-import { AnimatePresence,motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import FullScreenImage from "./FullScreenImage";
 import { useSwipeable } from "react-swipeable";
-import { FaGithub,FaGlobe } from "react-icons/fa";
+import { FaGithub, FaGlobe } from "react-icons/fa";
 import { AiOutlineFullscreen } from "react-icons/ai";
-import { IoIosArrowBack,IoIosArrowForward } from "react-icons/io";
-import { MdTouchApp } from "react-icons/md";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import { twMerge } from "tailwind-merge";
 
@@ -23,22 +22,10 @@ export default forwardRef(function Projects(props, ref) {
 
   const [fullScreenGallery, setFullScreenGallery] = useState(false);
 
-  const [showTouchIcon, setShowTouchIcon] = useState(true);
-
   const { heading, url, github, description, images, techStack } =
     projectsData[projectIndex];
 
   const { href, figcaption, alt, hash } = images[imageIndex];
-
-  //* handles touchIcon visbility
-  useEffect(() => {
-    setShowTouchIcon(false);
-    const timeOut = setTimeout(() => {
-      setShowTouchIcon(true);
-    }, 3000);
-
-    return () => clearTimeout(timeOut);
-  }, [href]);
 
   useEffect(() => {
     changeProjectIndex(animationDirection);
@@ -111,7 +98,7 @@ export default forwardRef(function Projects(props, ref) {
   const { inital, animate, transition, exit } = animation;
 
   return (
-    <div id="projects" className={`h-full`} ref={(el) => (ref.current[2] = el)}>
+    <div id="projects" className={``} ref={(el) => (ref.current[2] = el)}>
       {fullScreenGallery && (
         <FullScreenImage
           arrowClick={changeImage}
@@ -124,17 +111,17 @@ export default forwardRef(function Projects(props, ref) {
           close={() => closeFullScreenImage()}
         />
       )}
-      <div className={`h-full select-none`} {...touchHandlers}>
+      <div className={`min-h-screen select-none`} {...touchHandlers}>
         <AnimatePresence initial={false} mode="wait">
           <motion.div
             key={heading}
-            className={`mx-auto flex h-full w-[85%] max-w-[1500px] snap-start flex-col items-center justify-evenly gap-4 py-4 pt-[60px] md:pt-[80px] lg:gap-10 lg:pb-10`}
+            className={`mx-auto flex min-h-screen w-[85%] max-w-[1500px] snap-start flex-col items-center justify-evenly gap-4 py-4 pt-[60px] md:pt-[80px] lg:h-screen lg:gap-10 lg:pb-10`}
           >
             <div className={`flex w-screen px-4 md:w-full`}>
               <div
-                className={`z-10 flex w-full flex-col gap-2 self-start md:-top-6 md:gap-4`}
+                className={`z-10 flex w-full flex-col items-start gap-2 self-start md:-top-6 md:gap-4`}
               >
-                <div className={`flex items-center gap-2`}>
+                <div className={`flex items-start gap-2`}>
                   {projectsData.map((project, index) => {
                     return (
                       <div
@@ -151,7 +138,7 @@ export default forwardRef(function Projects(props, ref) {
                   className={`z-10 flex w-full items-center justify-between`}
                 >
                   <div
-                    className={`flex w-full items-center justify-start md:gap-4 lg:justify-center lg:gap-16`}
+                    className={`flex w-full items-center justify-start gap-4 lg:justify-center lg:gap-16`}
                   >
                     <div
                       className={`flex place-items-center justify-center gap-1 md:gap-4 landscape:gap-6`}
@@ -216,23 +203,25 @@ export default forwardRef(function Projects(props, ref) {
                     )}
                   </div>
                 </div>
-                <div className={"mx-auto h-[0.5px] w-10/12 bg-colorPreset3"} />
+                <div
+                  className={"mx-auto my-2 h-[0.5px] w-10/12 bg-colorPreset3"}
+                />
               </div>
             </div>
             <div
-              className={`flex h-full w-full flex-1 flex-col items-center justify-between gap-6 md:gap-10 landscape:max-h-[800px] landscape:flex-row`}
+              className={`flex h-full w-full flex-1 flex-col items-stretch justify-between gap-6 md:gap-10 landscape:max-h-[800px] landscape:flex-row`}
             >
               <motion.figure
                 initial={inital}
                 animate={animate}
                 transition={transition}
                 exit={exit}
-                className={`relative flex h-full w-full max-w-[650px] flex-col items-center justify-center rounded-md bg-colorPreset3/10 p-4 landscape:flex-1`}
+                className={`relative flex h-[50vh] w-full max-w-[650px] flex-col items-center justify-center rounded-md bg-colorPreset3/10 p-4 lg:h-full landscape:flex-1`}
               >
                 <AnimatePresence initial={false} mode="popLayout">
                   <div
                     className={twMerge(
-                      `relative size-full blur-md transition duration-0`,
+                      `relative h-full w-full blur-md transition duration-0`,
                       imageLoaded && `blur-none duration-150`,
                     )}
                   >
@@ -297,9 +286,6 @@ export default forwardRef(function Projects(props, ref) {
                     </div>
                   </div>
                 </AnimatePresence>
-                <MdTouchApp
-                  className={`absolute rounded-full fill-colorPreset5 outline outline-2 outline-offset-2 outline-colorPreset5 transition ${!showTouchIcon && `opacity-0`} bottom-[30%] right-[10%] size-6 -rotate-[25deg] md:size-8 landscape:bottom-[50%]`}
-                />
                 <div className={`flex w-full items-center justify-between`}>
                   <figcaption
                     className={`text-xs font-extralight italic md:-bottom-8 md:text-base`}
@@ -324,7 +310,7 @@ export default forwardRef(function Projects(props, ref) {
                 className={`flex max-w-full flex-col gap-2 md:gap-8 landscape:h-full landscape:flex-1 landscape:justify-between`}
               >
                 <div
-                  className={`flex h-[150px] w-full flex-col overflow-x-hidden overflow-y-scroll md:h-[200px] lg:h-[600px]`}
+                  className={`flex w-full flex-col overflow-x-hidden lg:h-[600px]`}
                 >
                   <motion.p
                     initial={inital}
@@ -341,7 +327,7 @@ export default forwardRef(function Projects(props, ref) {
                   animate={animate}
                   transition={transition}
                   exit={exit}
-                  className={`flex w-full flex-col gap-3 rounded-md border-b border-l border-colorPreset5 bg-colorPreset3/10 p-1 md:p-2`}
+                  className={`mt-4 flex w-full flex-col gap-3 rounded-md border-b border-l border-colorPreset5 bg-colorPreset3/10 p-1 md:p-2`}
                 >
                   <p className={`text-xs text-colorPreset3 md:text-lg`}>
                     Verwendete Technologien

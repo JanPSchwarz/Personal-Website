@@ -10,13 +10,11 @@ export default function Home() {
   const sectionRefs = useRef([]);
 
   return (
-    <div
-      className={`h-dvh snap-y snap-mandatory overflow-x-hidden overflow-y-scroll scroll-smooth`}
-    >
+    <>
       <Header sectionRefs={sectionRefs} />
       <Hero ref={sectionRefs} />
       <About ref={sectionRefs} />
       <Projects ref={sectionRefs} />
-    </div>
+    </>
   );
 }

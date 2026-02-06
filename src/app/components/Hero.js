@@ -8,6 +8,7 @@ import CookieBanner from "./CookieBanner";
 import Contact from "./Contact";
 import coverPic from "/public/assets/Cover-pic-Jan.webp";
 import Typewriter from "./Typewriter";
+import Blob from "/public/assets/blob.svg";
 
 export default forwardRef(function Hero(props, ref) {
   const [showMessenger, setShowMessenger] = useState(false);
@@ -65,7 +66,7 @@ export default forwardRef(function Hero(props, ref) {
       <div
         id="home"
         ref={(el) => (ref.current[0] = el)}
-        className={`mx-auto flex h-full w-[85%] max-w-[1200px] snap-start flex-col items-center justify-evenly pt-[50px] text-xl md:justify-around md:pt-[70px] md:text-3xl lg:gap-10 landscape:relative landscape:items-start landscape:justify-center landscape:gap-7`}
+        className={`mx-auto flex min-h-screen w-[85%] max-w-[1200px] snap-start flex-col items-center justify-evenly pt-[50px] text-xl md:w-[75%] md:justify-around md:pt-[70px] md:text-3xl lg:gap-10 landscape:relative landscape:items-start landscape:justify-center landscape:gap-7`}
       >
         <div className={`w-full text-left`}>
           <Typewriter
@@ -87,6 +88,10 @@ export default forwardRef(function Hero(props, ref) {
           transition={{ duration: 0.5 }}
           className={`relative left-[8%] aspect-square w-full overflow-visible landscape:absolute landscape:left-[55%] landscape:w-[60%]`}
         >
+          <Blob
+            fill={"colorPreset5"}
+            className={"size-full rotate-180 fill-colorPreset6"}
+          />
           <Image
             src={coverPic}
             fill

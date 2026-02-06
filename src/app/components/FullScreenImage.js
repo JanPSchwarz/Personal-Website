@@ -59,7 +59,7 @@ export default function FullScreenImage({
         />
         <div
           className={twMerge(
-            `relative flex h-[80%] w-[100%] blur-md transition duration-0`,
+            `relative flex h-[90%] w-[100%] blur-md transition duration-0`,
             imageLoaded && `blur-none duration-150`,
           )}
         >

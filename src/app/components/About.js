@@ -47,9 +47,9 @@ export default forwardRef(function About(prop, ref) {
       <div
         id="about"
         ref={(el) => (ref.current[1] = el)}
-        className={`mx-auto flex h-full w-[85%] max-w-[1200px] snap-start flex-col items-center justify-between gap-8 overflow-scroll pb-4 pt-[70px] [scrollbar-width:_none] md:pb-8 md:pt-[80px]`}
+        className={`mx-auto flex min-h-screen w-full snap-start flex-col items-center justify-between gap-12 overflow-scroll bg-colorPreset3/10 px-[10%] pb-12 pt-[70px] [scrollbar-width:_none] md:pt-[80px]`}
       >
-        <div>
+        <div className={"lg:w-3/4"}>
           <div
             className={`mb-4 flex w-full items-center justify-between md:mt-6`}
           >
@@ -60,6 +60,11 @@ export default forwardRef(function About(prop, ref) {
             </h2>
             <CVbutton className={`mx-1 size-10 bg-colorPreset5 md:size-16`} />
           </div>
+          <div
+            className={
+              "mx-auto my-2 mb-6 h-[0.5px] w-full bg-colorPreset3 md:mb-12"
+            }
+          />
           <div
             className={`flex h-[90%] flex-col justify-evenly gap-4 space-y-4 text-pretty text-sm font-light leading-loose text-colorPreset2 md:mt-6 md:justify-start lg:text-lg lg:leading-loose [&_a]:text-colorPreset5 [&_a]:underline [&_a]:underline-offset-4 [&_strong]:text-colorPreset5`}
           >

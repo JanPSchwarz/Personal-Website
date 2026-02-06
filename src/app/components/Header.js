@@ -23,7 +23,7 @@ export default function Header({ sectionRefs }) {
   useEffect(() => {
     const sections = sectionRefs.current;
 
-    const oberser = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (items) => {
         items.forEach((item) => {
           if (item.isIntersecting) {
@@ -31,17 +31,17 @@ export default function Header({ sectionRefs }) {
           }
         });
       },
-      { threshold: 0.7 },
+      { threshold: 0, rootMargin: "-20% 0px -60% 0px" },
     );
 
     sections.forEach((section) => {
-      if (section) oberser.observe(section);
+      if (section) observer.observe(section);
     });
 
     return () => {
       sections.forEach((section) => {
         if (section) {
-          oberser.unobserve(section);
+          observer.unobserve(section);
         }
       });
     };
@@ -58,7 +58,7 @@ export default function Header({ sectionRefs }) {
   function navigate(name) {
     sectionRefs.current
       .find(({ id }) => id === name)
-      .scrollIntoView({ behaviou: `smooth`, block: `start` });
+      .scrollIntoView({ behaviour: `smooth`, block: `start` });
   }
 
   function handleTheme(prop) {
