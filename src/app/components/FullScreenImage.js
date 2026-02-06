@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { AiOutlineFullscreenExit } from "react-icons/ai";
-import { useEffect, useRef, useState } from "react";
+import { useEffect,useRef,useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 export default function FullScreenImage({
@@ -39,11 +39,11 @@ export default function FullScreenImage({
           close();
         }
       }}
-      className={`fixed inset-0 z-20 flex h-dvh w-screen flex-col items-center justify-center bg-transparent bg-opacity-90 backdrop:bg-opacity-90`}
+      className={`fixed inset-0 z-20 flex h-dvh w-screen flex-col items-center justify-center bg-transparent bg-opacity-90 backdrop:bg-opacity-90 focus-visible:outline-none`}
     >
       <div
         onClick={(event) => event.stopPropagation()}
-        className={`relative flex size-full select-none flex-col items-center justify-center gap-6 rounded-xl bg-slate-400 p-4`}
+        className={`relative flex size-full select-none flex-col items-center justify-center gap-6 rounded-xl bg-slate-400 p-4 focus-visible:outline-none`}
       >
         <AiOutlineFullscreenExit
           tabIndex={0}
