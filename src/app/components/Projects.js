@@ -1,12 +1,12 @@
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef,useEffect,useState } from "react";
 import Image from "next/image";
 import { projectsData } from "../../../lib/projectsData";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence,motion } from "framer-motion";
 import FullScreenImage from "./FullScreenImage";
 import { useSwipeable } from "react-swipeable";
-import { FaGithub, FaGlobe } from "react-icons/fa";
+import { FaGithub,FaGlobe } from "react-icons/fa";
 import { AiOutlineFullscreen } from "react-icons/ai";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack,IoIosArrowForward } from "react-icons/io";
 
 import { twMerge } from "tailwind-merge";
 
@@ -216,7 +216,7 @@ export default forwardRef(function Projects(props, ref) {
                 animate={animate}
                 transition={transition}
                 exit={exit}
-                className={`relative flex h-[50vh] w-full max-w-[650px] flex-col items-center justify-center rounded-md bg-colorPreset3/10 p-4 lg:h-full landscape:flex-1`}
+                className={`relative flex h-[400px] w-full max-w-[650px] flex-col items-center justify-center rounded-md bg-colorPreset3/10 p-4 lg:h-full landscape:flex-1`}
               >
                 <AnimatePresence initial={false} mode="popLayout">
                   <div
@@ -317,7 +317,7 @@ export default forwardRef(function Projects(props, ref) {
                     animate={animate}
                     transition={transition}
                     exit={exit}
-                    className={`text-pretty text-sm font-light leading-loose text-colorPreset2 md:text-base md:leading-loose lg:text-lg lg:leading-loose [&_a]:text-colorPreset5 [&_a]:underline [&_a]:underline-offset-4`}
+                    className={`text-justify text-sm font-light leading-loose text-colorPreset2 md:text-base md:leading-loose lg:text-balance lg:text-lg lg:leading-loose [&_a]:text-colorPreset5 [&_a]:underline [&_a]:underline-offset-4`}
                   >
                     {description}
                   </motion.p>

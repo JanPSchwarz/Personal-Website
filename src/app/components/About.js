@@ -1,11 +1,17 @@
 import CVbutton from "./CVbutton";
-import { forwardRef,useEffect,useState } from "react";
-import { SiAxios,SiMongodb,SiShadcnui,SiStyledcomponents,SiTypescript } from "react-icons/si";
+import { forwardRef, useEffect, useState } from "react";
+import {
+  SiAxios,
+  SiMongodb,
+  SiShadcnui,
+  SiStyledcomponents,
+  SiTypescript,
+} from "react-icons/si";
 import { AiOutlineJavaScript } from "react-icons/ai";
 import { TbBrandNextjs } from "react-icons/tb";
-import { FaCss3Alt,FaHtml5,FaReact } from "react-icons/fa6";
+import { FaCss3Alt, FaHtml5, FaReact } from "react-icons/fa6";
 import { RiTailwindCssFill } from "react-icons/ri";
-import { FaDocker,FaJava,FaNode } from "react-icons/fa";
+import { FaDocker, FaJava, FaNode } from "react-icons/fa";
 import { BiLogoSpringBoot } from "react-icons/bi";
 
 export default forwardRef(function About(prop, ref) {
@@ -66,7 +72,7 @@ export default forwardRef(function About(prop, ref) {
             }
           />
           <div
-            className={`flex h-[90%] flex-col justify-evenly gap-4 space-y-4 text-pretty text-sm font-light leading-loose text-colorPreset2 md:mt-6 md:justify-start lg:text-lg lg:leading-loose [&_a]:text-colorPreset5 [&_a]:underline [&_a]:underline-offset-4 [&_strong]:text-colorPreset5`}
+            className={`flex h-[90%] flex-col justify-evenly gap-4 space-y-4 text-justify text-sm font-light leading-loose text-colorPreset2 md:mt-6 md:justify-start lg:text-lg lg:leading-loose [&_a]:text-colorPreset5 [&_a]:underline [&_a]:underline-offset-4 [&_strong]:text-colorPreset5`}
           >
             <p>
               Nach einem Karrierewechsel habe ich mich voll und ganz der
